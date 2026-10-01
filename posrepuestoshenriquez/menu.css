@@ -254,12 +254,31 @@ body, html {
     z-index: 250;
   }
 
-  /* Evita que cualquier elemento empuje la página más ancha que la pantalla */
+  /* Evita que cualquier elemento empuje la página más ancha que la pantalla,
+     y fuerza a que SÍ se pueda desplazar hacia arriba/abajo para ver todos los íconos
+     (algunas reglas de style.css están pensadas solo para pantalla de computadora) */
   html, body {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    max-height: none !important;
   }
-  .menu-body, .layout, .main-area {
+  .menu-body {
     max-width: 100vw;
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+  .layout {
+    max-width: 100vw;
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+  .main-area {
+    max-width: 100vw;
+    height: auto !important;
+    overflow: visible !important;
   }
 
   .top-header {
