@@ -145,7 +145,21 @@ tbody tr:hover { background: #f8fafc; }
 }
 .btn-editar:hover { background: #1d4ed8; }
 
-/* ---------- Modal editar ---------- */
+.btn-reset {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: bold;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.btn-reset:hover { background: #b45309; }
+
+/* ---------- Modal editar / restablecer ---------- */
 .usr-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -190,7 +204,7 @@ tbody tr:hover { background: #f8fafc; }
   margin: 10px 0 4px 0;
 }
 
-.usr-modal select {
+.usr-modal select, .usr-modal input {
   width: 100%;
   padding: 10px;
   border: 1px solid #cbd5e1;
@@ -213,6 +227,15 @@ tbody tr:hover { background: #f8fafc; }
 .usr-modal button:hover { background: #1d4ed8; }
 
 #mensajeEditar { color: #b00020; font-size: 0.85em; }
+#mensajeResetPass { color: #b00020; font-size: 0.85em; word-break: break-word; }
+
+.btn-generar-pass {
+  background: #e5e7eb !important;
+  color: #334155 !important;
+  margin-bottom: 10px;
+  font-size: 0.85em;
+}
+.btn-generar-pass:hover { background: #cbd5e1 !important; }
 
 .usr-cotejo {
   display: grid;
