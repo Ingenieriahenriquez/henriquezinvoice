@@ -1,0 +1,256 @@
+/* =========================================================
+   Estilo "Factura Electrónica" para la factura impresa
+   Ingeniería & Tecnología Henríquez / mundo_korea_rd
+   Agrega este archivo con un <link> DESPUÉS de tu facturacion.css
+   ========================================================= */
+
+#overlayFactura {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 35, 0.55);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 30px 16px;
+}
+
+.fi-hoja {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 850px;
+  width: 100%;
+  padding: 26px;
+}
+
+.fac-factura-imprimir {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #1a1a1a;
+  font-size: 13px;
+}
+
+/* ---------- Encabezado ---------- */
+.fi-encabezado {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 3px solid #1a4d8f;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.fi-logo {
+  max-width: 90px;
+  max-height: 90px;
+  object-fit: contain;
+}
+
+.fi-titulo-doc {
+  flex: 1;
+  text-align: center;
+}
+
+.fi-titulo-doc h1 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #14294d;
+}
+
+.fi-titulo-doc p {
+  margin: 2px 0;
+  font-size: 12px;
+}
+
+.fi-qr-encabezado {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+}
+
+.fi-qr-encabezado img {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ---------- Cajas Emisor / Cliente ---------- */
+.fi-cajas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.fi-caja {
+  border: 1px solid #1a4d8f;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fi-caja-titulo {
+  background: #1a4d8f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.fi-caja-cuerpo {
+  padding: 10px 12px;
+}
+
+.fi-caja-cuerpo p {
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.fi-nombre-empresa {
+  font-weight: 700;
+  font-size: 13.5px !important;
+  color: #14294d;
+}
+
+.fi-eslogan {
+  font-style: italic;
+  color: #555;
+}
+
+/* ---------- Tabla de productos ---------- */
+.fi-tabla-titulo {
+  background: #1a4d8f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 6px 10px;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+}
+
+.fi-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+
+.fi-tabla th {
+  background: #eaf1fb;
+  border: 1px solid #b8cbe6;
+  padding: 6px 8px;
+  font-size: 11.5px;
+  text-align: left;
+  color: #14294d;
+}
+
+.fi-tabla td {
+  border: 1px solid #d7e0ee;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+.fi-tabla td:nth-child(2),
+.fi-tabla td:nth-child(3),
+.fi-tabla td:nth-child(4),
+.fi-tabla th:nth-child(2),
+.fi-tabla th:nth-child(3),
+.fi-tabla th:nth-child(4) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Totales + forma de pago ---------- */
+.fi-pie-totales {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.fi-info-pago p {
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.fi-totales {
+  min-width: 240px;
+}
+
+.fi-fila-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 10px;
+  font-size: 12.5px;
+}
+
+.fi-total-final {
+  background: #1a4d8f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 8px 10px;
+}
+
+/* ---------- Footer ---------- */
+.fi-footer {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  font-size: 10.5px;
+  color: #777;
+  text-align: center;
+}
+
+/* ---------- Controles (pantalla, no impresión) ---------- */
+.fi-controles {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.fi-controles select,
+.fi-controles button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.fi-controles button {
+  background: #1a4d8f;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+}
+
+.fi-controles button:hover {
+  filter: brightness(1.1);
+}
+
+@media print {
+  .no-imprimir {
+    display: none !important;
+  }
+  #overlayFactura {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .fi-hoja {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}

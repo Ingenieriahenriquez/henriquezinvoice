@@ -1,0 +1,20 @@
+const MODULOS = [
+  { id: "facturacion", icono: "🧾", nombre: "Facturación", desc: "Emite facturas, gestiona clientes y cobros.", color: "badge-morado" },
+  { id: "cotizacion", icono: "📝", nombre: "Cotización", desc: "Crea y convierte cotizaciones a factura.", color: "badge-rosado" },
+  { id: "inventario", icono: "📦", nombre: "Inventario", desc: "Administra productos, stock y categorías.", color: "badge-azul" },
+  { id: "codigobarras", icono: "🏷️", nombre: "Código de Barra", desc: "Genera e imprime códigos de barra.", color: "badge-verde" },
+  { id: "conduce", icono: "🚚", nombre: "Conduce", desc: "Pedidos, entregas y rutas.", color: "badge-azul" },
+  { id: "cuentaporcobrar", icono: "💳", nombre: "Cuenta por Cobrar", desc: "Clientes a crédito, saldos y cobros pendientes.", color: "badge-rosado" },
+  { id: "cuentaporpagar", icono: "💳", nombre: "Cuenta por Pagar", desc: "Deudas con proveedores y gastos pendientes.", color: "badge-rosado" },
+  { id: "proveedores", icono: "🤝", nombre: "Proveedores", desc: "Contactos y compras a proveedores.", color: "badge-rosado" },
+  { id: "bancos", icono: "🏦", nombre: "Bancos", desc: "Cuentas, depósitos y movimientos.", color: "badge-morado" },
+  { id: "caja", icono: "💵", nombre: "Caja", desc: "Control de ingresos y egresos diarios.", color: "badge-verde" },
+  { id: "gastos", icono: "🧾", nombre: "Administración de Gastos", desc: "Registra y controla gastos generales.", color: "badge-rojo" },
+  { id: "devoluciones", icono: "🔄", nombre: "Devoluciones", desc: "Registra productos devueltos y notas de crédito.", color: "badge-naranja" },
+  { id: "comprobantesfiscales", icono: "📄", nombre: "Comprobantes Fiscales", desc: "Consulta, valida y gestiona NCF.", color: "badge-amarillo" },
+  { id: "reportes", icono: "📈", nombre: "Reportes", desc: "Visualiza ventas y estadísticas.", color: "badge-amarillo" },
+  { id: "graficas", icono: "📊", nombre: "Gráficas", desc: "Ventas, compras y estadísticas visuales.", color: "badge-morado" },
+  { id: "soporte", icono: "🛠️", nombre: "Soporte", desc: "Registra solicitudes y seguimiento.", color: "badge-azul" },
+  { id: "usuarios", icono: "👥", nombre: "Usuarios", desc: "Gestiona accesos y permisos.", color: "badge-rosado" },
+  { id: "configuracion", icono: "⚙️", nombre: "Configuración", desc: "Ajustes generales del sistema.", color: "badge-morado" }
+];

@@ -1,0 +1,37 @@
+<!--
+  Pega este bloque dentro de configuracion.html, al final del formulario
+  (antes de cerrar el contenedor principal de la página).
+-->
+
+<div class="config-zona-roja" id="zonaRojaContenedor" style="display:none;">
+  <div class="zr-titulo">⚠️ Zona Roja — Reinicio del Sistema</div>
+  <p class="zr-advertencia">
+    Esta acción borra <strong>permanentemente</strong> todas las facturas, cotizaciones, clientes,
+    productos, conduces, devoluciones, abonos, gastos, cuentas por pagar, movimientos de caja y
+    bancos, y secuencias de NCF. <strong>No se puede deshacer.</strong> Los usuarios del sistema y
+    los datos de tu empresa en esta pantalla de Configuración NO se borran.
+  </p>
+  <button id="btnAbrirZonaRoja" class="zr-btn-abrir">🗑 Vaciar todos los datos del sistema</button>
+</div>
+
+<div class="overlay" id="overlayZonaRoja" style="display:none;">
+  <div class="zr-modal">
+    <h3>⚠️ Confirmar reinicio total del sistema</h3>
+    <p>Esta acción es <strong>irreversible</strong>. Se borrarán todas las facturas, cotizaciones,
+      clientes, productos, movimientos de caja/bancos, cuentas por pagar, gastos, devoluciones,
+      conduces y secuencias NCF.</p>
+
+    <label class="zr-label">Para confirmar, escribe exactamente: <strong>BORRAR TODO</strong></label>
+    <input type="text" id="zrTextoConfirmacion" placeholder="BORRAR TODO" autocomplete="off">
+
+    <label class="zr-label">Vuelve a ingresar tu contraseña:</label>
+    <input type="password" id="zrPasswordConfirmacion" placeholder="Tu contraseña" autocomplete="current-password">
+
+    <p class="zr-mensaje" id="zrMensaje"></p>
+
+    <div class="zr-botones">
+      <button id="btnConfirmarZonaRoja" class="zr-btn-borrar" disabled>Borrar Todo Permanentemente</button>
+      <button id="btnCancelarZonaRoja" class="zr-btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Menú Principal — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body class="menu-body">
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-title">📋 Menú Principal</div>
+      <nav class="sidebar-nav" id="sidebarNav"></nav>
+    </aside>
+
+    <div class="main-area">
+      <header class="top-header">
+        <div class="user-info">👤 <span id="nombreUsuario">Ing. Henríquez</span> — Administrador del Sistema</div>
+        <div class="datetime" id="fechaHora"></div>
+        <button id="btnSalir">Salir</button>
+      </header>
+
+      <div class="welcome">
+        <h1 id="welcomeTitulo">Bienvenido a Ingeniería & Tecnología Henríquez</h1>
+        <p id="welcomeEslogan">Selecciona una opción del menú para comenzar</p>
+      </div>
+
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+
+  </div>
+
+  <div class="contact-badge">Ing. Henríquez &nbsp;📞 849-393-6337</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="modulos-data.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

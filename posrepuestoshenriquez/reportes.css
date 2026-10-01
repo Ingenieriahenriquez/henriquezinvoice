@@ -1,0 +1,172 @@
+body, html { margin: 0; padding: 0; }
+
+.rep-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.rep-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rep-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.rep-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.rep-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.rep-card h3 {
+  margin-top: 0;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.rep-card h4 {
+  color: #475569;
+  font-size: 0.9em;
+  margin: 18px 0 8px 0;
+}
+
+.rep-filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.rep-filtros label {
+  display: block;
+  font-size: 0.8em;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.rep-filtros input {
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.btn-actualizar {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.btn-actualizar:hover { background: #1d4ed8; }
+
+.btn-exportar {
+  background: #0d9488;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.btn-exportar:hover { background: #0f766e; }
+
+.rep-titulo-impresion {
+  display: none;
+}
+
+.rep-cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.rep-cifra {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.rep-cifra-label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.rep-cifra-monto {
+  display: block;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #1b4332;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  text-align: left;
+  padding: 9px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  color: #1b4332;
+  background: #f1f5f9;
+  border-bottom: 2px solid #dbeafe;
+}
+
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid #eef1f4;
+  font-size: 0.88em;
+}
+
+tbody tr:hover { background: #f8fafc; }
+
+.tag-agotado { background: #fee2e2; color: #dc2626; padding: 3px 9px; border-radius: 12px; font-size: 0.78em; font-weight: bold; }
+.tag-bajo { background: #fef3c7; color: #b45309; padding: 3px 9px; border-radius: 12px; font-size: 0.78em; font-weight: bold; }
+
+.monto-rojo { color: #dc2626; font-weight: bold; }
+.monto-verde { color: #16a34a; font-weight: bold; }
+
+.sin-datos { color: #888; font-style: italic; }
+
+@media print {
+  .no-imprimir { display: none !important; }
+  .rep-titulo-impresion {
+    display: block;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .rep-titulo-impresion h1 { color: #1b4332; margin: 0 0 4px 0; font-size: 1.3em; }
+  .rep-titulo-impresion p { margin: 0; color: #555; font-size: 0.9em; }
+  .rep-card { border: 1px solid #999; break-inside: avoid; }
+  body { background: white; }
+}

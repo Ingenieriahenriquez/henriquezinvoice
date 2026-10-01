@@ -1,0 +1,167 @@
+body, html { margin: 0; padding: 0; }
+
+.bnc-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.bnc-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bnc-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.bnc-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.bnc-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.bnc-card h3 {
+  margin-top: 0;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.bnc-total-card {
+  text-align: center;
+}
+
+.bnc-total-label {
+  display: block;
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.bnc-total-monto {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.bnc-columnas {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.bnc-card label {
+  display: block;
+  font-size: 0.82em;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.bnc-card input, .bnc-card select {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+.bnc-card button {
+  width: 100%;
+  padding: 10px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.bnc-card button:hover { background: #1b4332; }
+
+#mensajeCuenta, #mensajeMovimiento { color: #b00020; font-size: 0.85em; margin: 6px 0 0 0; }
+
+.bnc-tipo-toggle {
+  display: flex;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.bnc-toggle-btn {
+  flex: 1;
+  border: none;
+  background: white;
+  padding: 9px;
+  cursor: pointer;
+  font-size: 0.85em;
+  color: #555;
+}
+
+.bnc-toggle-btn.activo {
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  text-align: left;
+  padding: 9px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  color: #1b4332;
+  background: #f1f5f9;
+  border-bottom: 2px solid #dbeafe;
+}
+
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid #eef1f4;
+  font-size: 0.88em;
+}
+
+tbody tr:hover { background: #f8fafc; }
+
+.tag-deposito { color: #16a34a; font-weight: bold; }
+.tag-retiro { color: #dc2626; font-weight: bold; }
+
+.sin-datos { color: #888; font-style: italic; }
+
+#buscadorMov {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .bnc-columnas { grid-template-columns: 1fr; }
+}

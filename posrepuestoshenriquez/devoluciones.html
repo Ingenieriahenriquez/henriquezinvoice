@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Devoluciones — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="devoluciones.css">
+</head>
+<body class="dev-body">
+
+  <header class="dev-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🔄 Devoluciones</h2>
+  </header>
+
+  <div class="dev-wrap">
+
+    <!-- Paso 1: buscar factura -->
+    <div class="dev-card" id="pasoBuscarFactura">
+      <h3>🔍 Paso 1: Buscar la Factura Original</h3>
+      <p class="dev-ayuda">Sin factura no se pueden procesar devoluciones ni cambios.</p>
+      <input type="text" id="buscadorFactura" placeholder="🔍 No. de factura o nombre del cliente...">
+      <div id="resultadosFactura"></div>
+    </div>
+
+    <!-- Paso 2: seleccionar productos a devolver -->
+    <div class="dev-card" id="pasoProductos" style="display:none;">
+      <button type="button" id="btnCambiarFactura" class="btn-link">← Buscar otra factura</button>
+      <h3>📋 Factura <span id="facturaNumeroTitulo"></span> — <span id="facturaClienteTitulo"></span></h3>
+
+      <table id="tablaItemsFactura">
+        <thead>
+          <tr><th></th><th>Producto</th><th>Cant. Facturada</th><th>Cant. a Devolver</th><th>Precio</th><th>Subtotal</th></tr>
+        </thead>
+        <tbody id="cuerpoItemsFactura"></tbody>
+      </table>
+
+      <label>Motivo de la devolución</label>
+      <input type="text" id="motivoDevolucion" placeholder="Ej: Producto defectuoso, pieza incorrecta...">
+
+      <div class="dev-total-card">
+        <span>Total a Acreditar</span>
+        <span id="totalCredito">$0.00</span>
+      </div>
+
+      <button type="button" id="btnProcesarDevolucion" class="btn-procesar">✔ Procesar Devolución</button>
+      <p id="mensajeDevolucion"></p>
+    </div>
+
+    <!-- Historial -->
+    <div class="dev-card">
+      <h3>📖 Historial de Devoluciones</h3>
+      <input type="text" id="buscadorHistorial" placeholder="🔍 Buscar por cliente...">
+      <table id="tablaHistorial">
+        <thead><tr><th>No.</th><th>Fecha</th><th>Cliente</th><th>Factura Original</th><th>Motivo</th><th>Monto Acreditado</th></tr></thead>
+        <tbody id="cuerpoHistorial"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Nota de crédito imprimible -->
+  <div class="dev-print-overlay" id="overlayNota" style="display:none;">
+    <p class="dev-guardada-banner">✔ Devolución procesada</p>
+    <div class="dev-doc-imprimir" id="notaImprimir">
+      <h2 id="pfEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
+      <p id="pfEmpresaTelefono">Tel: 849-393-6337</p>
+      <hr>
+      <p><strong>NOTA DE CRÉDITO</strong></p>
+      <p><strong>No.:</strong> <span id="pfNumero"></span></p>
+      <p><strong>Fecha:</strong> <span id="pfFecha"></span></p>
+      <p><strong>Cliente:</strong> <span id="pfCliente"></span></p>
+      <p><strong>Factura original:</strong> <span id="pfFacturaOriginal"></span></p>
+      <p><strong>Motivo:</strong> <span id="pfMotivo"></span></p>
+      <hr>
+      <table id="pfTabla">
+        <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <tbody id="pfCuerpo"></tbody>
+      </table>
+      <hr>
+      <p><strong>Total Acreditado: <span id="pfTotal"></span></strong></p>
+    </div>
+    <div class="dev-print-botones">
+      <button id="btnImprimirNota">🖶️ Imprimir</button>
+      <button id="btnNuevaDevolucion">Nueva Devolución</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="devoluciones.js"></script>
+</body>
+</html>

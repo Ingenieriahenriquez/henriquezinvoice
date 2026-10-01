@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Iniciar Sesión — Ingeniería &amp; Tecnología Henríquez</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Resplandores de fondo -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+
+  <div class="login-box">
+
+    <!-- Ícono circular superior -->
+    <div class="login-icono">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+      </svg>
+    </div>
+
+    <h1 id="tituloLogin">Iniciar Sesión</h1>
+    <p class="login-subtitulo" id="welcomeEslogan">Ingeniería &amp; Tecnología Henríquez</p>
+
+    <form id="formLogin">
+
+      <div class="form-group">
+        <div class="campo-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"></path>
+          </svg>
+          <input type="email" id="correo" name="correo" placeholder="Correo electrónico" autocomplete="username" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="campo-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          <input type="password" id="password" name="password" placeholder="Contraseña" autocomplete="current-password" required />
+        </div>
+      </div>
+
+      <div class="login-opciones">
+        <label>
+          <input type="checkbox" id="recordarme" />
+          Recordarme
+        </label>
+        <a href="#" id="linkOlvido">¿Olvidó su contraseña?</a>
+      </div>
+
+      <button type="submit" id="btnLogin">Entrar</button>
+
+      <div class="login-error" id="mensajeError" style="display:none;"></div>
+    </form>
+
+    <!-- ===================================================== -->
+    <!-- Panel de "Nueva Contraseña": oculto por defecto.       -->
+    <!-- Se muestra solo cuando se llega desde el link del      -->
+    <!-- correo de recuperación de Supabase.                    -->
+    <!-- ===================================================== -->
+    <div id="panelRecuperar" style="display:none;">
+
+      <div class="form-group">
+        <div class="campo-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          <input type="password" id="nuevaPassword" placeholder="Nueva contraseña" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="campo-icono">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="16" height="10" rx="2"></rect>
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+          </svg>
+          <input type="password" id="confirmarPassword" placeholder="Confirmar contraseña" autocomplete="new-password" />
+        </div>
+      </div>
+
+      <button type="button" id="btnGuardarNuevaPassword">Guardar Contraseña</button>
+
+      <div class="login-error" id="mensajeRecuperar" style="display:none;"></div>
+    </div>
+
+    <div class="login-footer">© Ingeniería &amp; Tecnología Henríquez</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

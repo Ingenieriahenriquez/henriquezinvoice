@@ -1,0 +1,737 @@
+body, html { margin: 0; padding: 0; }
+
+.fac-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.fac-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.proximo-numero {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.fac-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.fac-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- Fila 1: cliente / comprobante / fecha ---------- */
+.fac-toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.campo-cliente-wrap {
+  position: relative;
+}
+
+.campo-cliente {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 8px 0 12px;
+}
+
+.icono-campo { margin-right: 8px; color: #2563eb; }
+
+.campo-cliente input {
+  border: none;
+  outline: none;
+  padding: 11px 0;
+  flex: 1;
+  font-size: 0.95em;
+}
+
+#btnToggleDatosCliente {
+  border: none;
+  background: #eef2ff;
+  color: #2563eb;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+#btnToggleDatosCliente:hover { background: #dbeafe; }
+
+#resultadosCliente {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.cliente-item {
+  padding: 9px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 0.88em;
+}
+.cliente-item:hover { background: #eef2ff; }
+.cliente-item strong { color: #1b4332; display: block; }
+.cliente-item span { color: #888; font-size: 0.85em; }
+
+#tipoComprobante {
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9em;
+  color: #1e3a5f;
+  font-weight: bold;
+}
+
+.campo-fecha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e3a5f;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+/* ---------- Datos adicionales de cliente ---------- */
+.fac-datos-cliente {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.fac-datos-cliente input {
+  padding: 9px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.85em;
+  box-sizing: border-box;
+}
+
+/* ---------- Fila 2: forma de pago / condición ---------- */
+.fac-toolbar-2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toggle-grupo {
+  display: flex;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  border: none;
+  background: white;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 0.85em;
+  color: #555;
+  border-right: 1px solid #e5e7eb;
+}
+
+.toggle-btn:last-child { border-right: none; }
+
+.toggle-btn.activo {
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+}
+
+.condicion-credito.activo {
+  background: #d97706;
+}
+
+/* ---------- Buscador de producto ---------- */
+.fac-buscador-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.fac-buscador-card .campo-cliente {
+  border: none;
+  padding: 0;
+}
+
+#resultadosProd {
+  margin-top: 8px;
+}
+
+.resultado-item {
+  padding: 9px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.resultado-item:hover { background: #eef2ff; }
+.resultado-item strong { color: #1b4332; }
+
+/* ---------- Tabla estilo hoja de cálculo ---------- */
+.fac-tabla-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #333;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background: #f1f5f9;
+}
+
+th {
+  text-align: left;
+  padding: 10px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #1e293b;
+  background: #f1f5f9;
+  border: 1px solid #333;
+}
+
+td {
+  padding: 10px 8px;
+  border: 1px solid #333;
+  font-size: 0.9em;
+  color: #1e293b;
+}
+
+tbody tr:hover { background: #f8fafc; }
+
+tr.fila-vacia td {
+  color: #cbd5e1;
+  height: 34px;
+}
+
+.col-num { width: 34px; color: #94a3b8; }
+.col-cant { width: 60px; }
+.col-precio { width: 100px; font-weight: bold; }
+.col-accion { width: 40px; }
+
+.cant-input {
+  width: 55px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.monto-negrita { font-weight: bold; }
+
+.btn-quitar {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-quitar:hover { background: #fecaca; }
+
+/* ---------- Totales ---------- */
+.fac-totales-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.totales-lineas p {
+  margin: 4px 0;
+  color: #475569;
+  font-size: 0.92em;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.totales-lineas p span {
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.total-final {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 24px;
+}
+
+.total-final span:first-child {
+  font-size: 1em;
+  color: #475569;
+  font-weight: bold;
+}
+
+.total-final span:last-child {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+/* ---------- Botones de acción ---------- */
+.fac-acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-facturar {
+  flex: 1;
+  padding: 14px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-facturar:hover { background: #15803d; }
+
+.btn-cancelar {
+  padding: 14px 24px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-cancelar:hover { background: #b91c1c; }
+
+#mensajeFactura { color: #b00020; font-size: 0.85em; margin-top: 10px; }
+
+/* ---------- Barra de estado inferior ---------- */
+.fac-status-bar {
+  margin-top: 16px;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 18px;
+  display: flex;
+  gap: 24px;
+  font-size: 0.85em;
+  flex-wrap: wrap;
+}
+
+.fac-status-bar span { font-weight: bold; }
+
+.btn-abono {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-abono:hover { background: #6d28d9; }
+
+.btn-nuevo-cliente {
+  background: #0891b2;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-nuevo-cliente:hover { background: #0e7490; }
+
+.btn-buscar-factura {
+  background: #475569;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-buscar-factura:hover { background: #334155; }
+
+.bf-subtitulo {
+  margin: 14px 0 4px 0;
+  font-size: 0.85em;
+  color: #1b4332;
+  font-weight: bold;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.bf-botones {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.bf-botones button { flex: 1; }
+
+/* ---------- Modal de Abonar a Factura de Crédito ---------- */
+.abono-modal {
+  background: white;
+  padding: 24px;
+  width: 380px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.abono-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.abono-modal-header h3 { margin: 0; color: #1b4332; font-size: 1.05em; }
+
+.btn-cerrar-x {
+  border: none;
+  background: #f1f5f9;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-cerrar-x:hover { background: #e2e8f0; }
+
+.abono-modal label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 10px 0 4px 0;
+}
+
+.abono-modal input,
+.abono-modal select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+#resultadosAbono { margin-top: 8px; }
+
+.abono-item {
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  font-size: 0.88em;
+}
+.abono-item:hover { background: #f5f3ff; border-color: #c4b5fd; }
+.abono-item strong { color: #1b4332; display: block; }
+.abono-item .abono-item-saldo { color: #dc2626; font-weight: bold; }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.85em;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.abono-detalle-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.abono-detalle-card p {
+  margin: 4px 0;
+  font-size: 0.88em;
+  color: #475569;
+}
+
+.abono-saldo span {
+  color: #dc2626;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+#abonoMensaje { color: #b00020; font-size: 0.85em; min-height: 16px; }
+
+#btnRegistrarAbono { width: 100%; margin-top: 8px; }
+.pago-modal {
+  background: white;
+  padding: 28px;
+  width: 320px;
+  border-radius: 10px;
+}
+
+.pago-modal h3 {
+  margin: 0 0 18px 0;
+  color: #1b4332;
+  text-align: center;
+}
+
+.pago-linea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.95em;
+  color: #475569;
+}
+
+.pago-monto-total {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.pago-modal label {
+  font-size: 0.85em;
+  color: #555;
+  display: block;
+  margin: 10px 0 4px 0;
+}
+
+.pago-modal input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2em;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.pago-cambio {
+  border-top: 2px solid #e5e7eb;
+  margin-top: 10px;
+  padding-top: 12px;
+}
+
+.pago-cambio span:last-child {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.pago-cambio.insuficiente span:last-child {
+  color: #dc2626;
+}
+
+#pagoMensaje { color: #b00020; font-size: 0.85em; min-height: 18px; }
+
+.pago-botones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ---------- Aviso fijo en la factura ---------- */
+.fac-aviso {
+  font-size: 0.72em;
+  font-style: italic;
+  color: #444;
+  text-align: center;
+  line-height: 1.3;
+  margin-top: 10px;
+}
+
+#pfQrContenedor {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  text-align: center;
+}
+
+#pfQrContenedor img {
+  width: 70px;
+  height: 70px;
+}
+.fac-print-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.fac-factura-imprimir {
+  background: white;
+  padding: 30px;
+  width: 380px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  font-size: 0.9em;
+  position: relative;
+}
+
+.fac-factura-imprimir h2,
+.fac-factura-imprimir > p#pfEmpresaEslogan,
+.fac-factura-imprimir > p#pfEmpresaTelefono,
+.fac-factura-imprimir > p#pfEmpresaRnc,
+.fac-factura-imprimir > p#raEmpresaEslogan,
+.fac-factura-imprimir > p#raEmpresaTelefono,
+.fac-factura-imprimir > p#raEmpresaRnc {
+  text-align: center;
+}
+
+.fac-factura-imprimir h2 { margin: 0 0 4px 0; color: #1b4332; font-size: 1.1em; }
+.fac-factura-imprimir table { margin-top: 8px; }
+.fac-factura-imprimir th, .fac-factura-imprimir td { font-size: 0.85em; padding: 4px; }
+
+.fac-guardada-banner {
+  background: #16a34a;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 0 0 12px 0;
+}
+
+.btn-guardar-sin-imprimir { background: #475569; }
+.btn-guardar-sin-imprimir:hover { background: #334155; }
+
+.formato-fila {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.formato-fila label {
+  display: block;
+  margin-bottom: 6px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.formato-fila select {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.fac-print-botones { margin-top: 16px; display: flex; gap: 12px; }
+
+.fac-print-botones button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+#btnImprimirFactura { background: #16a34a; }
+#btnImprimirFactura:hover { background: #15803d; }
+#btnNuevaVenta { background: #555; }
+#btnNuevaVenta:hover { background: #333; }
+
+@media print {
+  body > *:not(.fac-print-overlay) { display: none !important; }
+  .fac-print-overlay {
+    position: static;
+    background: none;
+    display: block !important;
+  }
+  .fac-print-botones, .formato-fila, .fac-guardada-banner { display: none !important; }
+  .fac-factura-imprimir {
+    box-shadow: none;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 720px) {
+  .fac-toolbar { grid-template-columns: 1fr; }
+  .fac-datos-cliente { grid-template-columns: 1fr 1fr; }
+  .fac-totales-card { justify-content: center; }
+  .total-final { border-left: none; padding-left: 0; }
+  .fac-status-bar { flex-direction: column; gap: 6px; }
+}

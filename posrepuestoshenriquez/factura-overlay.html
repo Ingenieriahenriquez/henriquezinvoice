@@ -1,0 +1,97 @@
+<!--
+  REEMPLAZA tu <div id="overlayFactura">...</div> actual completo por este bloque.
+  Todos los IDs que usa tu facturacion.js se mantuvieron exactamente iguales
+  (pfTipo, pfNumero, pfCliente, pfCuerpo, pfSubtotal, etc.), así que no hay
+  que tocar el JS para nada.
+-->
+<div class="overlay" id="overlayFactura">
+  <div class="fi-hoja">
+
+    <div class="fac-factura-imprimir" id="facturaImprimible">
+
+      <!-- ===== Encabezado ===== -->
+      <div class="fi-encabezado">
+        <img id="pfLogo" class="fi-logo" src="" alt="Logo" style="display:none;">
+        <div class="fi-titulo-doc">
+          <h1>FACTURA ELECTRÓNICA</h1>
+          <p>Tipo de Comprobante: <strong id="pfTipo"></strong></p>
+          <p>NCF: <strong id="pfNumero"></strong></p>
+          <p>Fecha de emisión: <strong id="pfFecha"></strong></p>
+        </div>
+        <div class="fi-qr-encabezado" id="pfQrContenedor" style="display:none;">
+          <img id="pfQr" src="" alt="QR">
+          <span>Verificación</span>
+        </div>
+      </div>
+
+      <!-- ===== Cajas Emisor / Cliente ===== -->
+      <div class="fi-cajas">
+        <div class="fi-caja">
+          <div class="fi-caja-titulo">DATOS DEL EMISOR</div>
+          <div class="fi-caja-cuerpo">
+            <p class="fi-nombre-empresa" id="pfEmpresaNombre">Ingeniería &amp; Tecnología Henríquez</p>
+            <p id="pfEmpresaEslogan" class="fi-eslogan" style="display:none;"></p>
+            <p id="pfEmpresaRnc" style="display:none;"></p>
+            <p id="pfEmpresaTelefono"></p>
+          </div>
+        </div>
+
+        <div class="fi-caja">
+          <div class="fi-caja-titulo">DATOS DEL CLIENTE</div>
+          <div class="fi-caja-cuerpo">
+            <p class="fi-nombre-empresa" id="pfCliente"></p>
+            <p id="pfLineaCedula" style="display:none;">RNC/Cédula: <span id="pfCedula"></span></p>
+            <p id="pfLineaWhatsapp" style="display:none;">WhatsApp: <span id="pfWhatsapp"></span></p>
+            <p id="pfLineaDireccion" style="display:none;">Dirección: <span id="pfDireccion"></span></p>
+            <p id="pfLineaSector" style="display:none;">Sector: <span id="pfSector"></span></p>
+            <p id="pfLineaReferencia" style="display:none;">Referencia: <span id="pfReferencia"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Tabla de productos ===== -->
+      <div class="fi-tabla-titulo">DETALLE DE PRODUCTOS</div>
+      <table class="fi-tabla">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Importe</th>
+          </tr>
+        </thead>
+        <tbody id="pfCuerpo"></tbody>
+      </table>
+
+      <!-- ===== Totales + forma de pago ===== -->
+      <div class="fi-pie-totales">
+        <div class="fi-info-pago">
+          <p>Método de Pago: <strong id="pfFormaPago"></strong></p>
+          <p id="pfLineaMonto" style="display:none;">Monto recibido: <strong id="pfMontoRecibido"></strong></p>
+          <p id="pfLineaCambio" style="display:none;">Cambio: <strong id="pfCambio"></strong></p>
+        </div>
+        <div class="fi-totales">
+          <div class="fi-fila-total"><span>Subtotal</span><span id="pfSubtotal"></span></div>
+          <div class="fi-fila-total"><span>ITBIS (18%)</span><span id="pfItbis"></span></div>
+          <div class="fi-fila-total fi-total-final"><span>TOTAL A PAGAR</span><span id="pfTotal"></span></div>
+        </div>
+      </div>
+
+      <div class="fi-footer">
+        Factura generada por el sistema de facturación de Ingeniería &amp; Tecnología Henríquez.
+      </div>
+    </div>
+
+    <!-- ===== Controles (no se imprimen) ===== -->
+    <div class="fi-controles no-imprimir">
+      <select id="formatoImpresion">
+        <option value="ticket">Ticket (80mm)</option>
+        <option value="carta">Carta (8.5x11)</option>
+      </select>
+      <button id="btnGuardarSinImprimir">Guardar sin Imprimir</button>
+      <button id="btnImprimirFactura">🖨 Imprimir</button>
+      <button id="btnNuevaVenta">Nueva Venta</button>
+    </div>
+
+  </div>
+</div>

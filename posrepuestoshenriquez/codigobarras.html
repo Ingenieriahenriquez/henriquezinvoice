@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Código de Barras — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="codigobarras.css">
+</head>
+<body class="cb-body">
+
+  <header class="cb-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🏷️ Código de Barras</h2>
+  </header>
+
+  <div class="cb-contenido">
+
+    <div class="cb-buscar-card">
+      <h3>Buscar Producto</h3>
+      <input type="text" id="buscadorCB" placeholder="🔍 Buscar por descripción, marca o código...">
+      <div id="resultadosCB"></div>
+    </div>
+
+    <div class="cb-etiqueta-card">
+      <h3>Vista Previa de Etiqueta</h3>
+      <div id="sinSeleccion">Selecciona un producto de la lista para generar su etiqueta.</div>
+
+      <div id="etiquetaContenedor" style="display:none;">
+        <div class="etiqueta" id="etiquetaImprimir">
+          <p class="et-nombre" id="etNombre"></p>
+          <svg id="etBarcode"></svg>
+          <p class="et-precio" id="etPrecio"></p>
+        </div>
+
+        <div class="cantidad-fila">
+          <label for="cantidadEtiquetas">Cantidad de etiquetas:</label>
+          <input type="number" id="cantidadEtiquetas" min="1" value="1">
+        </div>
+
+        <button id="btnImprimir">🖶️ Imprimir Etiqueta</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="areaImprimir"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="codigobarras.js"></script>
+</body>
+</html>

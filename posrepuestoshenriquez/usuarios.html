@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuarios — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="usuarios.css">
+</head>
+<body class="usr-body">
+
+  <header class="usr-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>👥 Usuarios</h2>
+  </header>
+
+  <div class="usr-wrap">
+
+    <!-- Se muestra si no tiene permiso -->
+    <div class="usr-card" id="panelSinPermiso" style="display:none;">
+      <h3>🚫 Acceso restringido</h3>
+      <p>No tienes permiso para gestionar usuarios. Este módulo es solo para Administradores y el Superadministrador.</p>
+    </div>
+
+    <!-- Se muestra si sí tiene permiso -->
+    <div id="panelConPermiso" style="display:none;">
+
+      <div class="usr-columnas">
+
+        <div class="usr-col-izq">
+          <div class="usr-card">
+            <h3>➕ Registrar Usuario</h3>
+            <label>Nombre completo</label>
+            <input type="text" id="nuevoNombre" placeholder="Nombre y apellido">
+            <label>Correo (para iniciar sesión)</label>
+            <input type="email" id="nuevoCorreo" placeholder="correo@ejemplo.com">
+            <label>Contraseña</label>
+            <input type="password" id="nuevaContrasena" placeholder="Mínimo 6 caracteres">
+            <label>Teléfono</label>
+            <input type="text" id="nuevoTelefono" placeholder="Opcional">
+            <label>Rol</label>
+            <select id="nuevoRol"></select>
+
+            <div id="panelModulosCrear">
+              <label>Módulos permitidos (además del rol)</label>
+              <div class="usr-cotejo" id="cotejoModulosCrear"></div>
+            </div>
+
+            <button type="button" id="btnCrearUsuario">Registrar Usuario</button>
+            <p id="mensajeCrear"></p>
+          </div>
+        </div>
+
+        <div class="usr-col-der">
+          <div class="usr-card">
+            <h3>Usuarios del Sistema</h3>
+            <input type="text" id="buscadorUsuario" placeholder="🔍 Buscar por nombre o correo...">
+            <table id="tablaUsuarios">
+              <thead>
+                <tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Rol</th><th>Estado</th><th></th></tr>
+              </thead>
+              <tbody id="cuerpoUsuarios"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Editar usuario -->
+  <div class="usr-overlay" id="overlayEditar" style="display:none;">
+    <div class="usr-modal">
+      <div class="usr-modal-header">
+        <h3>✏️ Editar Usuario</h3>
+        <button type="button" id="btnCerrarEditar" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <p><strong id="editNombreTitulo"></strong></p>
+
+      <label>Rol</label>
+      <select id="editRol"></select>
+
+      <label>Estado</label>
+      <select id="editActivo">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+
+      <div id="panelModulosEditar">
+        <label>Módulos permitidos (además del rol)</label>
+        <div class="usr-cotejo" id="cotejoModulosEditar"></div>
+      </div>
+
+      <p id="mensajeEditar"></p>
+      <button type="button" id="btnGuardarEdicion">💾 Guardar Cambios</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="modulos-data.js"></script>
+  <script src="usuarios.js"></script>
+</body>
+</html>

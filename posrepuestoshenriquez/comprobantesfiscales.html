@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comprobantes Fiscales — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="comprobantesfiscales.css">
+</head>
+<body class="ncf-body">
+
+  <header class="ncf-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>📄 Comprobantes Fiscales</h2>
+  </header>
+
+  <div class="ncf-wrap">
+
+    <div class="ncf-columnas">
+
+      <div class="ncf-col-izq">
+        <div class="ncf-card">
+          <h3>➕ Registrar Secuencia NCF</h3>
+          <label>Tipo de Comprobante</label>
+          <select id="ncfTipo">
+            <option value="E32">E32 - Factura de Consumo</option>
+            <option value="E31">E31 - Crédito Fiscal</option>
+            <option value="E33">E33 - Nota de Débito</option>
+            <option value="E34">E34 - Nota de Crédito</option>
+            <option value="E45">E45 - Gubernamental</option>
+            <option value="E44">E44 - Regímenes Especiales</option>
+            <option value="E46">E46 - Exportaciones</option>
+          </select>
+          <label>Secuencia Desde</label>
+          <input type="number" id="ncfDesde" placeholder="1">
+          <label>Secuencia Hasta</label>
+          <input type="number" id="ncfHasta" placeholder="5000">
+          <label>Fecha de vencimiento de la autorización</label>
+          <input type="date" id="ncfVencimiento">
+          <button type="button" id="btnGuardarSecuencia">Guardar Secuencia</button>
+          <p id="mensajeSecuencia"></p>
+        </div>
+
+        <div class="ncf-card">
+          <h3>🔎 Consultar NCF</h3>
+          <label>Buscar por número de NCF o factura</label>
+          <input type="text" id="buscadorNcf" placeholder="Ej: E320000001234 o número de factura">
+          <div id="resultadoConsulta"></div>
+        </div>
+      </div>
+
+      <div class="ncf-col-der">
+        <div class="ncf-card">
+          <h3>Secuencias Registradas</h3>
+          <table id="tablaSecuencias">
+            <thead><tr><th>Tipo</th><th>Rango</th><th>Usados</th><th>Disponibles</th><th>Vence</th><th>Estado</th></tr></thead>
+            <tbody id="cuerpoSecuencias"></tbody>
+          </table>
+        </div>
+
+        <div class="ncf-card">
+          <h3>🎫 Asignar NCF a una Factura</h3>
+          <label>Buscar factura sin NCF asignado</label>
+          <input type="text" id="buscadorFactura" placeholder="🔍 No. de factura o cliente...">
+          <div id="resultadosFactura"></div>
+
+          <div id="detalleFacturaAsignar" style="display:none;">
+            <div class="ncf-detalle-card">
+              <p><strong>Factura:</strong> <span id="afNumero"></span></p>
+              <p><strong>Cliente:</strong> <span id="afCliente"></span></p>
+              <p><strong>Tipo:</strong> <span id="afTipo"></span></p>
+              <p><strong>NCF actual:</strong> <span id="afNcfActual"></span></p>
+            </div>
+            <button type="button" id="btnAsignarNcf">Asignar Siguiente NCF Disponible</button>
+            <p id="mensajeAsignar"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="comprobantesfiscales.js"></script>
+</body>
+</html>

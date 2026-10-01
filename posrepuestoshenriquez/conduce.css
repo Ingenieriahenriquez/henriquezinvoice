@@ -1,0 +1,333 @@
+body, html { margin: 0; padding: 0; }
+
+.gr-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.gr-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.gr-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.proximo-numero {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.gr-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.gr-columnas {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.gr-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.gr-card h3 {
+  margin-top: 0;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.gr-card label {
+  display: block;
+  font-size: 0.82em;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.gr-card input {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+.gr-ayuda {
+  font-size: 0.78em;
+  color: #888;
+  margin: 6px 0 0 0;
+}
+
+#resultadosFactura, #resultadosBuscarGuia {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.prov-item {
+  padding: 9px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 0.88em;
+  border-radius: 6px;
+}
+.prov-item:hover { background: #eef2ff; }
+.prov-item strong { color: #1b4332; display: block; }
+
+.btn-buscar-guia {
+  width: 100%;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.btn-buscar-guia:hover { background: #6d28d9; }
+
+/* ---------- Buscador de producto ---------- */
+#buscadorProd {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.resultado-item {
+  padding: 9px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.resultado-item:hover { background: #eef2ff; }
+.resultado-item strong { color: #1b4332; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+
+th {
+  text-align: left;
+  padding: 9px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  color: #1b4332;
+  background: #f1f5f9;
+  border-bottom: 2px solid #dbeafe;
+}
+
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid #eef1f4;
+  font-size: 0.9em;
+}
+
+tr.fila-vacia td { color: #cbd5e1; height: 30px; }
+
+.col-num { width: 34px; color: #94a3b8; }
+.col-cant { width: 90px; }
+.col-accion { width: 40px; }
+
+.cant-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.btn-quitar {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-quitar:hover { background: #fecaca; }
+
+/* ---------- Acciones ---------- */
+.gr-acciones { display: flex; gap: 12px; }
+
+.btn-generar {
+  flex: 1;
+  padding: 14px;
+  background: #0d9488;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-generar:hover { background: #0f766e; }
+
+.btn-cancelar {
+  padding: 14px 24px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-cancelar:hover { background: #b91c1c; }
+
+#mensajeGuia { color: #b00020; font-size: 0.85em; margin-top: 10px; }
+
+/* ---------- Documento imprimible ---------- */
+.gr-print-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.gr-guardada-banner {
+  background: #0d9488;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 0 0 12px 0;
+}
+
+.gr-doc-imprimir {
+  background: white;
+  padding: 30px;
+  width: 380px;
+  max-height: 75vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+.gr-doc-imprimir h2 { margin: 0 0 4px 0; color: #1b4332; font-size: 1.1em; }
+.gr-doc-imprimir table { margin-top: 8px; }
+.gr-doc-imprimir th, .gr-doc-imprimir td { font-size: 0.85em; padding: 4px; }
+
+.gr-firma {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.85em;
+  color: #444;
+}
+
+.gr-print-botones { margin-top: 16px; display: flex; gap: 12px; }
+
+.gr-print-botones button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+#btnImprimirGuia { background: #0d9488; }
+#btnImprimirGuia:hover { background: #0f766e; }
+#btnNuevaGuia { background: #555; }
+#btnNuevaGuia:hover { background: #333; }
+
+@media print {
+  body > *:not(.gr-print-overlay) { display: none !important; }
+  .gr-print-overlay {
+    position: static;
+    background: none;
+    display: block !important;
+  }
+  .gr-print-botones, .gr-guardada-banner { display: none !important; }
+  .gr-doc-imprimir { box-shadow: none; max-height: none; overflow: visible; }
+}
+
+/* ---------- Modal Buscar Guía ---------- */
+.bg-modal {
+  background: white;
+  padding: 24px;
+  width: 380px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.bg-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.bg-modal-header h3 { margin: 0; color: #1b4332; font-size: 1.05em; }
+
+.btn-cerrar-x {
+  border: none;
+  background: #f1f5f9;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-cerrar-x:hover { background: #e2e8f0; }
+
+.bg-modal label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 4px 0;
+}
+
+.bg-modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 800px) {
+  .gr-columnas { grid-template-columns: 1fr; }
+}

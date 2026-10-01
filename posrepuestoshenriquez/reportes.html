@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="reportes.css">
+</head>
+<body class="rep-body">
+
+  <header class="rep-header no-imprimir">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>📈 Reportes</h2>
+  </header>
+
+  <div class="rep-wrap">
+
+    <!-- Filtro de fecha -->
+    <div class="rep-card no-imprimir">
+      <div class="rep-filtros">
+        <div>
+          <label>Desde</label>
+          <input type="date" id="fechaDesde">
+        </div>
+        <div>
+          <label>Hasta</label>
+          <input type="date" id="fechaHasta">
+        </div>
+        <button type="button" id="btnActualizar" class="btn-actualizar">🔄 Actualizar</button>
+        <button type="button" id="btnExportarExcel" class="btn-exportar">📊 Exportar a Excel</button>
+        <button type="button" id="btnExportarPdf" class="btn-exportar">🖶️ Exportar a PDF</button>
+      </div>
+    </div>
+
+    <div class="rep-titulo-impresion" id="tituloImpresion"></div>
+
+    <!-- Resumen de ventas -->
+    <div class="rep-card">
+      <h3>💰 Resumen de Ventas</h3>
+      <div class="rep-cifras">
+        <div class="rep-cifra">
+          <span class="rep-cifra-label">Total Facturado</span>
+          <span class="rep-cifra-monto" id="cifraTotalVentas">$0.00</span>
+        </div>
+        <div class="rep-cifra">
+          <span class="rep-cifra-label">Cantidad de Facturas</span>
+          <span class="rep-cifra-monto" id="cifraCantFacturas">0</span>
+        </div>
+        <div class="rep-cifra">
+          <span class="rep-cifra-label">Ticket Promedio</span>
+          <span class="rep-cifra-monto" id="cifraPromedio">$0.00</span>
+        </div>
+      </div>
+
+      <h4>Desglose por Forma de Pago</h4>
+      <table id="tablaFormaPago">
+        <thead><tr><th>Forma de Pago</th><th>Cant.</th><th>Total</th></tr></thead>
+        <tbody id="cuerpoFormaPago"></tbody>
+      </table>
+    </div>
+
+    <!-- Productos más vendidos -->
+    <div class="rep-card">
+      <h3>🏆 Productos Más Vendidos</h3>
+      <table id="tablaMasVendidos">
+        <thead><tr><th>#</th><th>Producto</th><th>Cantidad Vendida</th><th>Total Generado</th></tr></thead>
+        <tbody id="cuerpoMasVendidos"></tbody>
+      </table>
+    </div>
+
+    <!-- Inventario bajo / agotado -->
+    <div class="rep-card">
+      <h3>📦 Inventario — Stock Bajo y Agotado</h3>
+      <table id="tablaInventario">
+        <thead><tr><th>Producto</th><th>Marca</th><th>Existencia</th><th>Stock Mínimo</th><th>Estado</th></tr></thead>
+        <tbody id="cuerpoInventario"></tbody>
+      </table>
+    </div>
+
+    <!-- Cuentas por cobrar -->
+    <div class="rep-card">
+      <h3>💳 Cuentas por Cobrar Pendientes</h3>
+      <table id="tablaCobrar">
+        <thead><tr><th>Cliente</th><th>Factura</th><th>Total</th><th>Abonado</th><th>Saldo</th><th>Antigüedad</th></tr></thead>
+        <tbody id="cuerpoCobrar"></tbody>
+      </table>
+    </div>
+
+    <!-- Cuentas por pagar -->
+    <div class="rep-card">
+      <h3>📄 Cuentas por Pagar Pendientes</h3>
+      <table id="tablaPagar">
+        <thead><tr><th>Proveedor</th><th>NCF</th><th>Vence</th><th>Monto</th><th>Pagado</th><th>Saldo</th></tr></thead>
+        <tbody id="cuerpoPagar"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="reportes.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Soporte — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="soporte.css">
+</head>
+<body class="sop-body">
+
+  <header class="sop-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🛠️ Soporte</h2>
+  </header>
+
+  <div class="sop-wrap">
+
+    <div class="sop-columnas">
+
+      <div class="sop-col-izq">
+        <div class="sop-card">
+          <h3>➕ Nueva Solicitud</h3>
+          <label>Cliente</label>
+          <input type="text" id="ticketCliente" placeholder="Nombre del cliente">
+          <label>Teléfono</label>
+          <input type="text" id="ticketTelefono" placeholder="Opcional">
+          <label>Asunto</label>
+          <input type="text" id="ticketAsunto" placeholder="Ej: Problema con instalación">
+          <label>Descripción</label>
+          <textarea id="ticketDescripcion" placeholder="Detalles de la solicitud..." rows="3"></textarea>
+          <label>Prioridad</label>
+          <select id="ticketPrioridad">
+            <option>Baja</option>
+            <option selected>Media</option>
+            <option>Alta</option>
+          </select>
+          <button type="button" id="btnCrearTicket">Registrar Solicitud</button>
+          <p id="mensajeTicket"></p>
+        </div>
+      </div>
+
+      <div class="sop-col-der">
+        <div class="sop-card">
+          <h3>Solicitudes</h3>
+          <div class="sop-filtros">
+            <input type="text" id="buscadorTicket" placeholder="🔍 Buscar por cliente o asunto...">
+            <select id="filtroEstado">
+              <option value="">Todos los estados</option>
+              <option>Abierto</option>
+              <option>En Proceso</option>
+              <option>Resuelto</option>
+              <option>Cerrado</option>
+            </select>
+          </div>
+          <div id="listaTickets"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Detalle del ticket -->
+  <div class="sop-overlay" id="overlayDetalle" style="display:none;">
+    <div class="sop-modal">
+      <div class="sop-modal-header">
+        <h3 id="detNumero">Solicitud #—</h3>
+        <button type="button" id="btnCerrarDetalle" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <div class="sop-detalle-card">
+        <p><strong>Cliente:</strong> <span id="detCliente"></span></p>
+        <p><strong>Teléfono:</strong> <span id="detTelefono"></span></p>
+        <p><strong>Asunto:</strong> <span id="detAsunto"></span></p>
+        <p><strong>Descripción:</strong> <span id="detDescripcion"></span></p>
+        <p><strong>Fecha:</strong> <span id="detFecha"></span></p>
+      </div>
+
+      <label>Estado</label>
+      <select id="detEstado">
+        <option>Abierto</option>
+        <option>En Proceso</option>
+        <option>Resuelto</option>
+        <option>Cerrado</option>
+      </select>
+      <button type="button" id="btnActualizarEstado">Actualizar Estado</button>
+
+      <h4>Seguimiento</h4>
+      <div id="listaNotas"></div>
+
+      <label>Agregar nota de seguimiento</label>
+      <textarea id="notaNueva" rows="2" placeholder="Ej: Se llamó al cliente, se agendó visita..."></textarea>
+      <button type="button" id="btnAgregarNota">Agregar Nota</button>
+      <p id="mensajeDetalle"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="soporte.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+body, html { margin: 0; padding: 0; }
+
+.sop-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.sop-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sop-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.sop-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.sop-columnas {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.sop-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.sop-card h3 {
+  margin-top: 0;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.sop-card label {
+  display: block;
+  font-size: 0.82em;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.sop-card input, .sop-card select, .sop-card textarea {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  font-family: Arial, sans-serif;
+}
+
+.sop-card button {
+  width: 100%;
+  padding: 10px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.sop-card button:hover { background: #1b4332; }
+
+#mensajeTicket { color: #b00020; font-size: 0.85em; margin: 6px 0 0 0; }
+
+.sop-filtros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.sop-filtros input { flex: 2; margin-bottom: 0; }
+.sop-filtros select { flex: 1; margin-bottom: 0; }
+
+.ticket-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+.ticket-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+.ticket-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.ticket-numero { font-weight: bold; color: #1b4332; }
+
+.ticket-asunto { font-size: 0.95em; color: #333; margin: 4px 0; }
+.ticket-cliente { font-size: 0.85em; color: #666; }
+
+.tag-prioridad {
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.prioridad-baja { background: #dbeafe; color: #2563eb; }
+.prioridad-media { background: #fef3c7; color: #b45309; }
+.prioridad-alta { background: #fee2e2; color: #dc2626; }
+
+.tag-estado {
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.estado-abierto { background: #fee2e2; color: #dc2626; }
+.estado-en-proceso { background: #fef3c7; color: #b45309; }
+.estado-resuelto { background: #dcfce7; color: #16a34a; }
+.estado-cerrado { background: #e5e7eb; color: #555; }
+
+.sin-datos { color: #888; font-style: italic; padding: 10px 0; }
+
+/* ---------- Modal de detalle ---------- */
+.sop-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.sop-modal {
+  background: white;
+  padding: 24px;
+  width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.sop-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.sop-modal-header h3 { margin: 0; color: #1b4332; font-size: 1.05em; }
+
+.btn-cerrar-x {
+  border: none;
+  background: #f1f5f9;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-cerrar-x:hover { background: #e2e8f0; }
+
+.sop-detalle-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.sop-detalle-card p { margin: 4px 0; font-size: 0.88em; color: #475569; }
+
+.sop-modal label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 10px 0 4px 0;
+}
+
+.sop-modal select, .sop-modal textarea {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+}
+
+.sop-modal button {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.sop-modal button:hover { background: #1d4ed8; }
+
+.sop-modal h4 {
+  color: #1b4332;
+  font-size: 0.9em;
+  margin: 16px 0 8px 0;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.nota-item {
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  font-size: 0.85em;
+}
+.nota-fecha { color: #888; font-size: 0.8em; display: block; margin-top: 2px; }
+
+#mensajeDetalle { color: #b00020; font-size: 0.85em; }
+
+@media (max-width: 800px) {
+  .sop-columnas { grid-template-columns: 1fr; }
+}

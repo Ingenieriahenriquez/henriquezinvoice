@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body.inv-body {
+  margin: 0;
+  padding: 0;
+  display: block;
+  height: auto;
+  align-items: initial;
+  justify-content: initial;
+  background: #f2f4f3;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.inv-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.inv-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.inv-contenido {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Fix del desborde: sin esto, un grid item puede "empujarse" fuera de su
+   columna asignada si su contenido (inputs, tabla) no cabe. */
+.inv-contenido > * {
+  min-width: 0;
+}
+
+.inv-form-card, .inv-tabla-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.inv-form-card h3, .inv-tabla-card h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+#formProducto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-width: 0;
+}
+
+#formProducto > * {
+  min-width: 0;
+}
+
+#formProducto input#descripcion,
+#formProducto button,
+#formProducto p {
+  grid-column: 1 / -1;
+}
+
+#formProducto input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+#formProducto input:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+}
+
+#formProducto button {
+  padding: 12px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 6px;
+  transition: background 0.2s ease;
+}
+
+#formProducto button:hover { background: #1b4332; }
+
+#mensajeForm {
+  color: #b00020;
+  font-size: 0.85em;
+  margin: 0;
+}
+
+#buscador {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+#buscador:focus {
+  outline: none;
+  border-color: #2d6a4f;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.88em;
+}
+
+th {
+  color: #1b4332;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+tbody tr:hover { background: #f8f9f8; }
+
+tr.stock-bajo { background: #fdecec; }
+tr.stock-bajo:hover { background: #fbdcdc; }
+
+.btn-eliminar {
+  background: #b00020;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+}
+
+.btn-eliminar:hover { background: #7a0015; }

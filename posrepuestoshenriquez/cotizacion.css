@@ -1,0 +1,483 @@
+body, html { margin: 0; padding: 0; }
+
+.cot-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.cot-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cot-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.proximo-numero {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.cot-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- Fila 1 ---------- */
+.cot-toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.campo-cliente-wrap { position: relative; }
+
+.campo-cliente {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.icono-campo { margin-right: 8px; color: #2563eb; }
+
+.campo-cliente input {
+  border: none;
+  outline: none;
+  padding: 11px 0;
+  flex: 1;
+  font-size: 0.95em;
+}
+
+#resultadosCliente {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.cliente-item {
+  padding: 9px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 0.88em;
+}
+.cliente-item:hover { background: #eef2ff; }
+.cliente-item strong { color: #1b4332; display: block; }
+.cliente-item span { color: #888; font-size: 0.85em; }
+
+.campo-vigencia {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.campo-vigencia label { font-size: 0.72em; color: #888; }
+.campo-vigencia input { border: none; outline: none; font-weight: bold; font-size: 0.95em; width: 100%; }
+
+.campo-fecha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e3a5f;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+/* ---------- Datos adicionales cliente ---------- */
+.cot-datos-cliente {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.cot-datos-cliente input {
+  padding: 9px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.85em;
+  box-sizing: border-box;
+}
+
+.cot-toolbar-2 { margin-bottom: 16px; }
+
+.btn-buscar-cot {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-buscar-cot:hover { background: #6d28d9; }
+
+/* ---------- Buscador de producto ---------- */
+.cot-buscador-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.cot-buscador-card .campo-cliente { border: none; padding: 0; }
+
+.resultado-item {
+  padding: 9px 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.resultado-item:hover { background: #eef2ff; }
+.resultado-item strong { color: #1b4332; }
+
+/* ---------- Tabla ---------- */
+.cot-tabla-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #333;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  text-align: left;
+  padding: 10px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #1e293b;
+  background: #f1f5f9;
+  border: 1px solid #333;
+}
+
+td {
+  padding: 10px 8px;
+  border: 1px solid #333;
+  font-size: 0.9em;
+  color: #1e293b;
+}
+
+tbody tr:hover { background: #f8fafc; }
+tr.fila-vacia td { color: #cbd5e1; height: 34px; }
+
+.col-num { width: 34px; color: #94a3b8; }
+.col-cant { width: 60px; }
+.col-precio { width: 100px; font-weight: bold; }
+.col-accion { width: 40px; }
+
+.cant-input {
+  width: 55px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.monto-negrita { font-weight: bold; }
+
+.btn-quitar {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+}
+.btn-quitar:hover { background: #fecaca; }
+
+/* ---------- Totales ---------- */
+.cot-totales-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.totales-lineas p {
+  margin: 4px 0;
+  color: #475569;
+  font-size: 0.92em;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.totales-lineas p span { font-weight: bold; color: #1e293b; }
+
+.total-final {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 24px;
+}
+.total-final span:first-child { font-size: 1em; color: #475569; font-weight: bold; }
+.total-final span:last-child { font-size: 1.8em; font-weight: bold; color: #2563eb; }
+
+/* ---------- Botones de acción ---------- */
+.cot-acciones { display: flex; gap: 12px; }
+
+.btn-generar {
+  flex: 1;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-generar:hover { background: #1d4ed8; }
+
+.btn-cancelar {
+  padding: 14px 24px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.btn-cancelar:hover { background: #b91c1c; }
+
+#mensajeCotizacion { color: #b00020; font-size: 0.85em; margin-top: 10px; }
+
+.cot-status-bar {
+  margin-top: 16px;
+  background: #1e293b;
+  color: #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 18px;
+  display: flex;
+  gap: 24px;
+  font-size: 0.85em;
+  flex-wrap: wrap;
+}
+.cot-status-bar span { font-weight: bold; }
+
+/* ---------- Documento imprimible ---------- */
+.cot-print-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.cot-guardada-banner {
+  background: #2563eb;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 0 0 12px 0;
+}
+
+.cot-doc-imprimir {
+  background: white;
+  padding: 30px;
+  width: 380px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+.cot-doc-imprimir h2 { margin: 0 0 4px 0; color: #1b4332; font-size: 1.1em; }
+.cot-doc-imprimir table { margin-top: 8px; }
+.cot-doc-imprimir th, .cot-doc-imprimir td { font-size: 0.85em; padding: 4px; }
+
+.cot-aviso {
+  font-size: 0.72em;
+  font-style: italic;
+  color: #444;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.formato-fila {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.formato-fila label {
+  display: block;
+  margin-bottom: 6px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
+.formato-fila select {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.cot-print-botones { margin-top: 16px; display: flex; gap: 12px; }
+
+.cot-print-botones button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+#btnImprimirCotizacion { background: #2563eb; }
+#btnImprimirCotizacion:hover { background: #1d4ed8; }
+#btnNuevaCotizacion { background: #555; }
+#btnNuevaCotizacion:hover { background: #333; }
+
+@media print {
+  body > *:not(.cot-print-overlay) { display: none !important; }
+  .cot-print-overlay {
+    position: static;
+    background: none;
+    display: block !important;
+  }
+  .cot-print-botones, .cot-guardada-banner, .formato-fila { display: none !important; }
+  .cot-doc-imprimir { box-shadow: none; max-height: none; overflow: visible; }
+}
+
+/* ---------- Modal Buscar/Convertir Cotización ---------- */
+.bc-modal {
+  background: white;
+  padding: 24px;
+  width: 380px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.bc-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.bc-modal-header h3 { margin: 0; color: #1b4332; font-size: 1.05em; }
+
+.btn-cerrar-x {
+  border: none;
+  background: #f1f5f9;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-cerrar-x:hover { background: #e2e8f0; }
+
+.bc-modal label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 10px 0 4px 0;
+}
+
+.bc-modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+#resultadosBuscarCot { margin-top: 8px; }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.85em;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.bc-detalle-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.bc-detalle-card p { margin: 4px 0; font-size: 0.88em; color: #475569; }
+
+#bcMensaje { color: #b00020; font-size: 0.85em; min-height: 16px; }
+
+.bc-botones { display: flex; gap: 10px; margin-top: 8px; }
+.bc-botones button { flex: 1; }
+
+@media (max-width: 720px) {
+  .cot-toolbar { grid-template-columns: 1fr; }
+  .cot-totales-card { justify-content: center; }
+  .total-final { border-left: none; padding-left: 0; }
+  .cot-status-bar { flex-direction: column; gap: 6px; }
+}

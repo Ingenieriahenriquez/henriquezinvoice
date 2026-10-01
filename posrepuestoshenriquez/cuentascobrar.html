@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuentas por Cobrar — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cuentascobrar.css">
+</head>
+<body class="cc-body">
+
+  <header class="cc-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>💳 Cuentas por Cobrar</h2>
+  </header>
+
+  <div class="cc-wrap">
+
+    <!-- Resumen -->
+    <div class="cc-card cc-resumen-card">
+      <div class="cc-resumen-item">
+        <span class="cc-resumen-label">Total Pendiente</span>
+        <span class="cc-resumen-monto cc-monto-rojo" id="totalPendiente">$0.00</span>
+      </div>
+      <div class="cc-resumen-item">
+        <span class="cc-resumen-label">Con más de 30 días</span>
+        <span class="cc-resumen-monto cc-monto-rojo" id="totalVencidas">$0.00</span>
+      </div>
+      <div class="cc-resumen-item">
+        <span class="cc-resumen-label">Clientes con deuda</span>
+        <span class="cc-resumen-monto" id="totalClientes">0</span>
+      </div>
+    </div>
+
+    <div class="cc-card">
+      <h3>Facturas a Crédito Pendientes</h3>
+      <input type="text" id="buscadorCuentas" placeholder="🔍 Buscar por cliente...">
+      <table id="tablaCuentas">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Factura</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Abonado</th>
+            <th>Saldo</th>
+            <th>Antigüedad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoCuentas"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Registrar Abono -->
+  <div class="cc-overlay" id="overlayPago" style="display:none;">
+    <div class="cc-modal">
+      <div class="cc-modal-header">
+        <h3>💵 Registrar Abono</h3>
+        <button type="button" id="btnCerrarPago" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <div class="cc-detalle-card">
+        <p><strong>Cliente:</strong> <span id="pgCliente"></span></p>
+        <p><strong>Factura:</strong> <span id="pgFactura"></span></p>
+        <p><strong>Total:</strong> <span id="pgTotal"></span></p>
+        <p><strong>Abonado:</strong> <span id="pgAbonado"></span></p>
+        <p class="cc-saldo-linea"><strong>Saldo pendiente:</strong> <span id="pgSaldo"></span></p>
+      </div>
+
+      <label>Monto a abonar</label>
+      <input type="number" step="0.01" id="pgMonto" placeholder="0.00">
+
+      <label>Forma de pago</label>
+      <select id="pgFormaPago">
+        <option>Efectivo</option>
+        <option>Tarjeta Crédito</option>
+        <option>Tarjeta Débito</option>
+        <option>Transferencia</option>
+        <option>Cheque</option>
+      </select>
+
+      <p id="pgMensaje"></p>
+
+      <button type="button" id="btnConfirmarPago">✔ Registrar Abono</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="cuentascobrar.js"></script>
+</body>
+</html>

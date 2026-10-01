@@ -1,0 +1,21 @@
+/* =========================================================
+   Fondo azul del Menú Principal (mismo tono que el login)
+   Este archivo SOLO cambia el color de fondo, no toca nada más.
+   ========================================================= */
+
+html, body {
+  background: linear-gradient(135deg, #16324f 0%, #0c1f36 60%, #060e1c 100%) !important;
+}
+
+/* Por si el fondo blanco está en un contenedor específico
+   en vez de en body, cubrimos los nombres más comunes: */
+.main-area,
+.main-content,
+.contenido,
+.contenido-principal,
+.menu-content,
+.menu-wrapper,
+.dashboard,
+.app-content {
+  background: transparent !important;
+}

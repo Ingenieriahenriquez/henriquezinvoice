@@ -1,0 +1,21 @@
+<!--
+  Pega este bloque dentro de configuracion.html, en cualquier parte
+  visible del formulario (por ejemplo, arriba de todo).
+  Tiene su PROPIO botón de guardar, no toca tu formulario principal.
+-->
+<div class="tn-card">
+  <h3>Tipo de Negocio</h3>
+  <p class="tn-nota">
+    Esto cambia las etiquetas del módulo de Inventario (Marca, Modelo, etc.)
+    para que se ajusten a tu tipo de negocio. No borra ni mueve ningún dato.
+  </p>
+  <select id="tipoNegocioSelect">
+    <option value="repuestos_vehiculos">Repuestos de vehículos</option>
+    <option value="repuestos_motos">Repuestos de motocicletas</option>
+    <option value="farmacia">Farmacia</option>
+    <option value="supermercado">Supermercado / Colmado</option>
+    <option value="generico">Genérico (otro tipo de negocio)</option>
+  </select>
+  <button id="btnGuardarTipoNegocio">Guardar Tipo de Negocio</button>
+  <p id="tnMensaje"></p>
+</div>

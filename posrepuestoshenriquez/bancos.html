@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bancos — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bancos.css">
+</head>
+<body class="bnc-body">
+
+  <header class="bnc-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🏦 Bancos</h2>
+  </header>
+
+  <div class="bnc-wrap">
+
+    <div class="bnc-card bnc-total-card">
+      <span class="bnc-total-label">Total en Bancos</span>
+      <span class="bnc-total-monto" id="totalBancos">$0.00</span>
+    </div>
+
+    <div class="bnc-columnas">
+
+      <div class="bnc-col-izq">
+        <div class="bnc-card">
+          <h3>🏦 Registrar Cuenta</h3>
+          <label>Nombre del banco</label>
+          <input type="text" id="bancoNombre" placeholder="Ej: Banreservas">
+          <label>Número de cuenta</label>
+          <input type="text" id="bancoNumero" placeholder="Opcional">
+          <label>Tipo de cuenta</label>
+          <select id="bancoTipo">
+            <option>Corriente</option>
+            <option>Ahorros</option>
+          </select>
+          <label>Saldo inicial</label>
+          <input type="number" step="0.01" id="bancoSaldoInicial" placeholder="0.00">
+          <button type="button" id="btnGuardarCuenta">Guardar Cuenta</button>
+          <p id="mensajeCuenta"></p>
+        </div>
+
+        <div class="bnc-card">
+          <h3>➕ Registrar Movimiento</h3>
+          <label>Cuenta</label>
+          <select id="movCuenta"></select>
+          <div class="bnc-tipo-toggle">
+            <button type="button" class="bnc-toggle-btn activo" id="btnTipoDeposito" data-tipo="deposito">⬆️ Depósito</button>
+            <button type="button" class="bnc-toggle-btn" id="btnTipoRetiro" data-tipo="retiro">⬇️ Retiro</button>
+          </div>
+          <label>Descripción</label>
+          <input type="text" id="movDescripcion" placeholder="Ej: Depósito de ventas del día">
+          <label>Fecha</label>
+          <input type="date" id="movFecha">
+          <label>Monto</label>
+          <input type="number" step="0.01" id="movMonto" placeholder="0.00">
+          <button type="button" id="btnRegistrarMovimiento">Registrar Movimiento</button>
+          <p id="mensajeMovimiento"></p>
+        </div>
+      </div>
+
+      <div class="bnc-col-der">
+        <div class="bnc-card">
+          <h3>Mis Cuentas</h3>
+          <table id="tablaCuentas">
+            <thead><tr><th>Banco</th><th>No. Cuenta</th><th>Tipo</th><th>Saldo</th></tr></thead>
+            <tbody id="cuerpoCuentas"></tbody>
+          </table>
+        </div>
+
+        <div class="bnc-card">
+          <h3>Movimientos Recientes</h3>
+          <input type="text" id="buscadorMov" placeholder="🔍 Buscar por descripción o banco...">
+          <table id="tablaMovimientos">
+            <thead><tr><th>Fecha</th><th>Cuenta</th><th>Tipo</th><th>Descripción</th><th>Monto</th></tr></thead>
+            <tbody id="cuerpoMovimientos"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="bancos.js"></script>
+</body>
+</html>

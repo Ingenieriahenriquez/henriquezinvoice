@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía de Remisión — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="conduce.css">
+</head>
+<body class="gr-body">
+
+  <header class="gr-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🚚 Guía de Remisión</h2>
+    <div class="proximo-numero" id="proximoNumeroBadge">Próxima Guía: #—</div>
+  </header>
+
+  <div class="gr-wrap">
+
+    <div class="gr-columnas">
+
+      <div class="gr-col-izq">
+
+        <!-- Vincular a factura -->
+        <div class="gr-card">
+          <h3>🔗 Vincular a Factura (opcional)</h3>
+          <input type="text" id="buscadorFactura" placeholder="🔍 No. de factura...">
+          <div id="resultadosFactura"></div>
+          <p class="gr-ayuda">Si vinculas una factura, el cliente y los productos se cargan automáticamente.</p>
+        </div>
+
+        <!-- Datos del envío -->
+        <div class="gr-card">
+          <h3>📦 Datos del Envío</h3>
+          <label>Cliente</label>
+          <input type="text" id="clienteNombre" value="Consumidor Final">
+          <label>Destino</label>
+          <input type="text" id="destino" placeholder="Dirección de entrega">
+          <label>Fecha de traslado</label>
+          <input type="date" id="fechaTraslado">
+        </div>
+
+        <!-- Datos del transportista -->
+        <div class="gr-card">
+          <h3>🚛 Datos del Transportista</h3>
+          <label>Nombre</label>
+          <input type="text" id="transNombre" placeholder="Opcional">
+          <label>Cédula</label>
+          <input type="text" id="transCedula" placeholder="Opcional">
+          <label>Vehículo / Placa</label>
+          <input type="text" id="transVehiculo" placeholder="Opcional">
+        </div>
+
+        <button type="button" id="btnAbrirBuscarGuia" class="btn-buscar-guia">🔎 Buscar / Reimprimir Guía</button>
+      </div>
+
+      <div class="gr-col-der">
+
+        <!-- Buscador de producto -->
+        <div class="gr-card">
+          <h3>Productos a Trasladar</h3>
+          <input type="text" id="buscadorProd" placeholder="🔍 Buscar producto por nombre, marca o código...">
+          <div id="resultadosProd"></div>
+
+          <table id="tablaCarrito">
+            <thead>
+              <tr>
+                <th class="col-num">#</th>
+                <th>Producto</th>
+                <th class="col-cant">Cantidad</th>
+                <th class="col-accion"></th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoCarrito"></tbody>
+          </table>
+        </div>
+
+        <div class="gr-acciones">
+          <button id="btnGenerarGuia" class="btn-generar">✔ Generar Guía de Remisión</button>
+          <button id="btnCancelarGuia" class="btn-cancelar">✕ Cancelar</button>
+        </div>
+        <p id="mensajeGuia"></p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Guía generada / imprimible -->
+  <div class="gr-print-overlay" id="overlayGuia" style="display:none;">
+    <p class="gr-guardada-banner">✔ Guía guardada en el sistema</p>
+    <div class="gr-doc-imprimir" id="guiaImprimir">
+      <h2 id="pfEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
+      <p id="pfEmpresaEslogan" style="display:none;"></p>
+      <p id="pfEmpresaTelefono">Tel: 849-393-6337</p>
+      <p id="pfEmpresaRnc" style="display:none;"></p>
+      <hr>
+      <p><strong>GUÍA DE REMISIÓN</strong></p>
+      <p><strong>No.:</strong> <span id="pfNumero"></span></p>
+      <p><strong>Fecha de traslado:</strong> <span id="pfFecha"></span></p>
+      <p id="pfLineaFactura" style="display:none;"><strong>Factura relacionada:</strong> <span id="pfFactura"></span></p>
+      <p><strong>Cliente:</strong> <span id="pfCliente"></span></p>
+      <p id="pfLineaDestino" style="display:none;"><strong>Destino:</strong> <span id="pfDestino"></span></p>
+      <hr>
+      <p><strong>Transportista</strong></p>
+      <p id="pfLineaTransNombre" style="display:none;">Nombre: <span id="pfTransNombre"></span></p>
+      <p id="pfLineaTransCedula" style="display:none;">Cédula: <span id="pfTransCedula"></span></p>
+      <p id="pfLineaTransVehiculo" style="display:none;">Vehículo: <span id="pfTransVehiculo"></span></p>
+      <hr>
+      <table id="pfTabla">
+        <thead><tr><th>Producto</th><th>Cantidad</th></tr></thead>
+        <tbody id="pfCuerpo"></tbody>
+      </table>
+      <hr>
+      <p class="gr-firma">_______________________<br>Firma de recibido conforme</p>
+    </div>
+    <div class="gr-print-botones">
+      <button id="btnImprimirGuia">🖶️ Imprimir</button>
+      <button id="btnNuevaGuia">Nueva Guía</button>
+    </div>
+  </div>
+
+  <!-- Buscar / Reimprimir Guía -->
+  <div class="gr-print-overlay" id="overlayBuscarGuia" style="display:none;">
+    <div class="bg-modal">
+      <div class="bg-modal-header">
+        <h3>🔎 Buscar Guía</h3>
+        <button type="button" id="btnCerrarBuscarGuia" class="btn-cerrar-x">✕</button>
+      </div>
+      <label>Número de guía o nombre del cliente</label>
+      <input type="text" id="buscadorGuia" placeholder="🔍 Ej: 3 o nombre del cliente...">
+      <div id="resultadosBuscarGuia"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="conduce.js"></script>
+</body>
+</html>

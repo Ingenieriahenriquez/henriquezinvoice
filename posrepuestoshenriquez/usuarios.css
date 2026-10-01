@@ -1,0 +1,252 @@
+body, html { margin: 0; padding: 0; }
+
+.usr-body {
+  background: #eef1f4;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.usr-header {
+  background: #1b4332;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.usr-header h2 { margin: 0; font-size: 1.2em; }
+
+.btn-volver {
+  color: white;
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+.btn-volver:hover { background: rgba(255,255,255,0.3); }
+
+.usr-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.usr-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.usr-card h3 {
+  margin-top: 0;
+  color: #1b4332;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.usr-columnas {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.usr-card label {
+  display: block;
+  font-size: 0.82em;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.usr-card input, .usr-card select {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+}
+
+.usr-card button {
+  width: 100%;
+  padding: 10px;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.usr-card button:hover { background: #1b4332; }
+
+#mensajeCrear { color: #b00020; font-size: 0.85em; margin: 6px 0 0 0; }
+
+#buscadorUsuario {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  text-align: left;
+  padding: 9px 8px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  color: #1b4332;
+  background: #f1f5f9;
+  border-bottom: 2px solid #dbeafe;
+}
+
+td {
+  padding: 9px 8px;
+  border-bottom: 1px solid #eef1f4;
+  font-size: 0.88em;
+}
+
+tbody tr:hover { background: #f8fafc; }
+
+.sin-datos { color: #888; font-style: italic; }
+
+.tag-rol {
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.rol-superadministrador { background: #ede9fe; color: #7c3aed; }
+.rol-administrador { background: #dbeafe; color: #2563eb; }
+.rol-vendedor { background: #dcfce7; color: #16a34a; }
+.rol-cajero { background: #fef3c7; color: #b45309; }
+.rol-inventarista { background: #fde3cf; color: #c2410c; }
+.rol-consulta { background: #e5e7eb; color: #555; }
+
+.tag-activo { background: #dcfce7; color: #16a34a; padding: 3px 9px; border-radius: 12px; font-size: 0.75em; font-weight: bold; }
+.tag-inactivo { background: #fee2e2; color: #dc2626; padding: 3px 9px; border-radius: 12px; font-size: 0.75em; font-weight: bold; }
+
+.btn-editar {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: bold;
+}
+.btn-editar:hover { background: #1d4ed8; }
+
+/* ---------- Modal editar ---------- */
+.usr-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.usr-modal {
+  background: white;
+  padding: 24px;
+  width: 340px;
+  border-radius: 10px;
+}
+
+.usr-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.usr-modal-header h3 { margin: 0; color: #1b4332; font-size: 1.05em; }
+
+.btn-cerrar-x {
+  border: none;
+  background: #f1f5f9;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+.btn-cerrar-x:hover { background: #e2e8f0; }
+
+.usr-modal label {
+  display: block;
+  font-size: 0.85em;
+  color: #555;
+  margin: 10px 0 4px 0;
+}
+
+.usr-modal select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.usr-modal button {
+  width: 100%;
+  padding: 11px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.usr-modal button:hover { background: #1d4ed8; }
+
+#mensajeEditar { color: #b00020; font-size: 0.85em; }
+
+.usr-cotejo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f8fafc;
+}
+
+.usr-cotejo label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82em;
+  color: #334155;
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.usr-cotejo input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+#panelModulosCrear, #panelModulosEditar {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .usr-columnas { grid-template-columns: 1fr; }
+}

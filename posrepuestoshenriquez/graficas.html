@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráficas — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="graficas.css">
+</head>
+<body class="gra-body">
+
+  <header class="gra-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>📊 Gráficas</h2>
+  </header>
+
+  <div class="gra-wrap">
+
+    <div class="gra-card">
+      <div class="gra-filtros">
+        <div>
+          <label>Desde</label>
+          <input type="date" id="fechaDesde">
+        </div>
+        <div>
+          <label>Hasta</label>
+          <input type="date" id="fechaHasta">
+        </div>
+        <button type="button" id="btnActualizar" class="btn-actualizar">🔄 Actualizar Gráficas</button>
+      </div>
+    </div>
+
+    <div class="gra-grid">
+      <div class="gra-card">
+        <h3>📈 Ventas por Día</h3>
+        <canvas id="chartVentasDia"></canvas>
+      </div>
+
+      <div class="gra-card">
+        <h3>🥧 Ventas por Forma de Pago</h3>
+        <canvas id="chartFormaPago"></canvas>
+      </div>
+
+      <div class="gra-card">
+        <h3>🏆 Top 5 Productos Más Vendidos</h3>
+        <canvas id="chartTopProductos"></canvas>
+      </div>
+
+      <div class="gra-card">
+        <h3>💰 Ingresos vs Gastos</h3>
+        <canvas id="chartIngresosGastos"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="graficas.js"></script>
+</body>
+</html>

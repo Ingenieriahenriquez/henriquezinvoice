@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotización — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cotizacion.css">
+</head>
+<body class="cot-body">
+
+  <header class="cot-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>📝 Cotización</h2>
+    <div class="proximo-numero" id="proximoNumeroBadge">Próxima Cotización: #—</div>
+  </header>
+
+  <div class="cot-wrap">
+
+    <!-- Fila 1: cliente, vigencia, fecha -->
+    <div class="cot-toolbar">
+      <div class="campo-cliente-wrap">
+        <div class="campo-cliente">
+          <span class="icono-campo">🔍</span>
+          <input type="text" id="nombreCliente" value="Consumidor Final" placeholder="Buscar o escribir cliente...">
+        </div>
+        <div id="resultadosCliente"></div>
+      </div>
+
+      <div class="campo-vigencia">
+        <label for="vigenciaDias">Vigencia (días)</label>
+        <input type="number" id="vigenciaDias" value="15" min="1">
+      </div>
+
+      <div class="campo-fecha" id="fechaCotizacion"></div>
+    </div>
+
+    <!-- Datos adicionales del cliente -->
+    <div class="cot-datos-cliente" id="panelDatosCliente">
+      <input type="text" id="clienteCedula" placeholder="🪪 Cédula/RNC (opcional)">
+      <input type="text" id="clienteWhatsapp" placeholder="📱 WhatsApp (opcional)">
+      <input type="text" id="clienteDireccion" placeholder="📍 Dirección (opcional)">
+      <input type="text" id="clienteSector" placeholder="🏘️ Sector (opcional)">
+      <input type="text" id="clienteReferencia" placeholder="📌 Punto de referencia (opcional)">
+    </div>
+
+    <div class="cot-toolbar-2">
+      <button type="button" id="btnAbrirNuevoCliente" class="btn-buscar-cot" style="background:#0891b2;">➕ Registrar Cliente Nuevo</button>
+      <button type="button" id="btnAbrirBuscarCot" class="btn-buscar-cot">🔎 Buscar / Convertir Cotización</button>
+    </div>
+
+    <!-- Buscador de producto -->
+    <div class="cot-buscador-card">
+      <div class="campo-cliente">
+        <span class="icono-campo">🔍</span>
+        <input type="text" id="buscadorProd" placeholder="Buscar producto por nombre, marca o código para agregar...">
+      </div>
+      <div id="resultadosProd"></div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="cot-tabla-card">
+      <table id="tablaCarrito">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th>Producto</th>
+            <th>Código</th>
+            <th class="col-cant">Cant.</th>
+            <th class="col-precio">Precio</th>
+            <th class="col-precio">Total</th>
+            <th class="col-accion"></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoCarrito"></tbody>
+      </table>
+    </div>
+
+    <!-- Totales -->
+    <div class="cot-totales-card">
+      <div class="totales-lineas">
+        <p>Subtotal <span id="txtSubtotal">$0.00</span></p>
+        <p>ITBIS (18%) <span id="txtItbis">$0.00</span></p>
+      </div>
+      <div class="total-final">
+        <span>Total</span>
+        <span id="txtTotal">$0.00</span>
+      </div>
+    </div>
+
+    <div class="cot-acciones">
+      <button id="btnGenerarCotizacion" class="btn-generar">✔ Generar Cotización</button>
+      <button id="btnCancelarCotizacion" class="btn-cancelar">✕ Cancelar</button>
+    </div>
+    <p id="mensajeCotizacion"></p>
+
+    <div class="cot-status-bar">
+      <span id="statusItems">📦 0 items</span>
+      <span id="statusVigencia">⏳ 15 días</span>
+    </div>
+
+  </div>
+
+  <!-- Cotización generada / imprimible -->
+  <div class="cot-print-overlay" id="overlayCotizacion" style="display:none;">
+    <p class="cot-guardada-banner">✔ Cotización guardada en el sistema</p>
+    <div class="cot-doc-imprimir" id="cotizacionImprimir">
+      <h2 id="pfEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
+      <p id="pfEmpresaEslogan" style="display:none;"></p>
+      <p id="pfEmpresaTelefono">Tel: 849-393-6337</p>
+      <p id="pfEmpresaRnc" style="display:none;"></p>
+      <hr>
+      <p><strong>COTIZACIÓN</strong></p>
+      <p><strong>No.:</strong> <span id="pfNumero"></span></p>
+      <p><strong>Fecha:</strong> <span id="pfFecha"></span></p>
+      <p><strong>Válida hasta:</strong> <span id="pfVencimiento"></span></p>
+      <p><strong>Cliente:</strong> <span id="pfCliente"></span></p>
+      <p id="pfLineaCedula" style="display:none;"><strong>Cédula/RNC:</strong> <span id="pfCedula"></span></p>
+      <p id="pfLineaWhatsapp" style="display:none;"><strong>WhatsApp:</strong> <span id="pfWhatsapp"></span></p>
+      <p id="pfLineaDireccion" style="display:none;"><strong>Dirección:</strong> <span id="pfDireccion"></span></p>
+      <p id="pfLineaSector" style="display:none;"><strong>Sector:</strong> <span id="pfSector"></span></p>
+      <p id="pfLineaReferencia" style="display:none;"><strong>Referencia:</strong> <span id="pfReferencia"></span></p>
+      <hr>
+      <table id="pfTabla">
+        <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <tbody id="pfCuerpo"></tbody>
+      </table>
+      <hr>
+      <p>Subtotal: <span id="pfSubtotal"></span></p>
+      <p>ITBIS: <span id="pfItbis"></span></p>
+      <p><strong>Total: <span id="pfTotal"></span></strong></p>
+      <hr>
+      <p class="cot-aviso">Esta cotización es válida por el período indicado. Precios sujetos a cambio sin previo aviso una vez vencida.</p>
+    </div>
+
+    <div class="formato-fila">
+      <label for="formatoImpresion">Formato de impresión:</label>
+      <select id="formatoImpresion">
+        <option value="ticket">🧾 Ticket POS (80mm)</option>
+        <option value="carta" selected>📄 Carta (8.5" x 11")</option>
+      </select>
+    </div>
+
+    <div class="cot-print-botones">
+      <button id="btnImprimirCotizacion">🖶️ Imprimir</button>
+      <button id="btnNuevaCotizacion">Nueva Cotización</button>
+    </div>
+  </div>
+
+  <!-- Buscar / Convertir Cotización -->
+  <div class="cot-print-overlay" id="overlayBuscarCot" style="display:none;">
+    <div class="bc-modal">
+      <div class="bc-modal-header">
+        <h3>🔎 Buscar Cotización</h3>
+        <button type="button" id="btnCerrarBuscarCot" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <div id="bcPasoBuscar">
+        <label>Número de cotización o nombre del cliente</label>
+        <input type="text" id="buscadorCot" placeholder="🔍 Ej: 5 o nombre del cliente...">
+        <div id="resultadosBuscarCot"></div>
+      </div>
+
+      <div id="bcPasoDetalle" style="display:none;">
+        <button type="button" id="btnVolverBuscarCot" class="btn-link">← Buscar otra cotización</button>
+
+        <div class="bc-detalle-card">
+          <p><strong>Cotización No.:</strong> <span id="bcNumero"></span></p>
+          <p><strong>Fecha:</strong> <span id="bcFecha"></span></p>
+          <p><strong>Cliente:</strong> <span id="bcCliente"></span></p>
+          <p><strong>Total:</strong> <span id="bcTotal"></span></p>
+          <p><strong>Estado:</strong> <span id="bcEstado"></span></p>
+        </div>
+
+        <p id="bcMensaje"></p>
+
+        <div class="bc-botones">
+          <button type="button" id="btnReimprimirCot" class="btn-buscar-cot">🖶️ Reimprimir</button>
+          <button type="button" id="btnConvertirFactura" class="btn-generar">🧾 Convertir a Factura</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registrar Cliente Nuevo -->
+  <div class="cot-print-overlay" id="overlayNuevoCliente" style="display:none;">
+    <div class="bc-modal">
+      <div class="bc-modal-header">
+        <h3>➕ Registrar Cliente Nuevo</h3>
+        <button type="button" id="btnCerrarNuevoCliente" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <label>Nombre *</label>
+      <input type="text" id="ncNombre" placeholder="Nombre completo del cliente">
+      <label>Cédula/RNC</label>
+      <input type="text" id="ncCedula" placeholder="Opcional">
+      <label>WhatsApp</label>
+      <input type="text" id="ncWhatsapp" placeholder="Opcional">
+      <label>Dirección</label>
+      <input type="text" id="ncDireccion" placeholder="Opcional">
+      <label>Sector</label>
+      <input type="text" id="ncSector" placeholder="Opcional">
+      <label>Punto de referencia</label>
+      <input type="text" id="ncReferencia" placeholder="Opcional">
+
+      <p id="ncMensaje"></p>
+
+      <button type="button" id="btnGuardarNuevoCliente" class="btn-generar">✔ Guardar Cliente</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="cotizacion.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventario — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="inventario.css">
+</head>
+<body class="inv-body">
+
+  <header class="inv-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>📦 Inventario</h2>
+  </header>
+
+  <div class="inv-contenido">
+
+    <div class="inv-form-card">
+      <h3>Agregar Producto</h3>
+      <form id="formProducto">
+        <input type="text" id="descripcion" placeholder="Descripción *" required>
+        <input type="text" id="marca" placeholder="Marca">
+        <input type="text" id="modelo" placeholder="Modelo">
+        <input type="text" id="anio_vehiculo" placeholder="Información adicional">
+        <input type="text" id="referencia" placeholder="Referencia">
+        <input type="text" id="codigo_manual" placeholder="Código manual">
+        <input type="text" id="codigo_barras" placeholder="Código de barras">
+        <input type="text" id="categoria" placeholder="Categoría">
+        <input type="number" step="0.01" id="precio_costo" placeholder="Precio costo">
+        <input type="number" step="0.01" id="precio_venta" placeholder="Precio venta *" required>
+        <input type="number" id="existencia" placeholder="Existencia (0 por defecto)">
+        <input type="number" id="stock_minimo" placeholder="Stock mínimo (0 por defecto)">
+        <button type="submit">Guardar Producto</button>
+        <p id="mensajeForm"></p>
+      </form>
+    </div>
+
+    <div class="inv-tabla-card">
+      <h3>Productos en Inventario</h3>
+      <input type="text" id="buscador" placeholder="🔍 Buscar por descripción, marca o código...">
+      <table id="tablaProductos">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Código</th>
+            <th>Precio Venta</th>
+            <th>Existencia</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoTabla"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="inventario.js"></script>
+</body>
+</html>
