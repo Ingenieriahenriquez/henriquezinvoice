@@ -42,6 +42,7 @@ body, html { margin: 0; padding: 0; }
   max-width: 1100px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 /* ---------- Fila 1: cliente / comprobante / fecha ---------- */
@@ -73,6 +74,7 @@ body, html { margin: 0; padding: 0; }
   padding: 11px 0;
   flex: 1;
   font-size: 0.95em;
+  min-width: 0;
 }
 
 #btnToggleDatosCliente {
@@ -86,6 +88,7 @@ body, html { margin: 0; padding: 0; }
   font-weight: bold;
   cursor: pointer;
   line-height: 1;
+  flex-shrink: 0;
 }
 #btnToggleDatosCliente:hover { background: #dbeafe; }
 
@@ -121,6 +124,7 @@ body, html { margin: 0; padding: 0; }
   font-size: 0.9em;
   color: #1e3a5f;
   font-weight: bold;
+  max-width: 100%;
 }
 
 .campo-fecha {
@@ -145,6 +149,7 @@ body, html { margin: 0; padding: 0; }
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 12px;
+  box-sizing: border-box;
 }
 
 .fac-datos-cliente input {
@@ -153,6 +158,7 @@ body, html { margin: 0; padding: 0; }
   border-radius: 6px;
   font-size: 0.85em;
   box-sizing: border-box;
+  width: 100%;
 }
 
 /* ---------- Fila 2: forma de pago / condición ---------- */
@@ -181,6 +187,7 @@ body, html { margin: 0; padding: 0; }
   font-size: 0.85em;
   color: #555;
   border-right: 1px solid #e5e7eb;
+  white-space: nowrap;
 }
 
 .toggle-btn:last-child { border-right: none; }
@@ -203,6 +210,7 @@ body, html { margin: 0; padding: 0; }
   padding: 12px;
   margin-bottom: 16px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .fac-buscador-card .campo-cliente {
@@ -233,6 +241,12 @@ body, html { margin: 0; padding: 0; }
   margin-bottom: 16px;
 }
 
+/* Permite que la tabla se deslice horizontalmente en vez de deformarse */
+.fac-tabla-card {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -251,6 +265,7 @@ th {
   color: #1e293b;
   background: #f1f5f9;
   border: 1px solid #333;
+  white-space: nowrap;
 }
 
 td {
@@ -306,6 +321,7 @@ tr.fila-vacia td {
   gap: 30px;
   margin-bottom: 16px;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .totales-lineas p {
@@ -386,6 +402,7 @@ tr.fila-vacia td {
   gap: 24px;
   font-size: 0.85em;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .fac-status-bar span { font-weight: bold; }
@@ -448,9 +465,11 @@ tr.fila-vacia td {
   background: white;
   padding: 24px;
   width: 380px;
-  max-height: 80vh;
+  max-width: 92vw;
+  max-height: 85vh;
   overflow-y: auto;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .abono-modal-header {
@@ -471,6 +490,7 @@ tr.fila-vacia td {
   cursor: pointer;
   font-weight: bold;
   color: #555;
+  flex-shrink: 0;
 }
 .btn-cerrar-x:hover { background: #e2e8f0; }
 
@@ -541,7 +561,9 @@ tr.fila-vacia td {
   background: white;
   padding: 28px;
   width: 320px;
+  max-width: 92vw;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .pago-modal h3 {
@@ -637,17 +659,21 @@ tr.fila-vacia td {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .fac-factura-imprimir {
   background: white;
   padding: 30px;
   width: 380px;
+  max-width: 92vw;
   max-height: 70vh;
   overflow-y: auto;
   border-radius: 8px;
   font-size: 0.9em;
   position: relative;
+  box-sizing: border-box;
 }
 
 .fac-factura-imprimir h2,
@@ -697,7 +723,7 @@ tr.fila-vacia td {
   font-size: 0.9em;
 }
 
-.fac-print-botones { margin-top: 16px; display: flex; gap: 12px; }
+.fac-print-botones { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
 .fac-print-botones button {
   padding: 10px 20px;
@@ -728,10 +754,65 @@ tr.fila-vacia td {
   }
 }
 
+/* =========================================================
+   CELULAR / PANTALLAS PEQUEÑAS (hasta 720px de ancho)
+   ========================================================= */
 @media (max-width: 720px) {
+  .fac-wrap { padding: 10px; }
+
+  .fac-header {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .fac-header h2 { font-size: 1.05em; }
+  .proximo-numero { font-size: 0.75em; padding: 6px 10px; }
+  .btn-volver { font-size: 0.8em; padding: 6px 10px; }
+
+  /* Cliente / comprobante / fecha: una columna cada uno */
   .fac-toolbar { grid-template-columns: 1fr; }
+
   .fac-datos-cliente { grid-template-columns: 1fr 1fr; }
-  .fac-totales-card { justify-content: center; }
+
+  /* Forma de pago / condición / botones: todo en columna, ancho completo */
+  .fac-toolbar-2 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toggle-grupo { width: 100%; }
+  .toggle-btn { flex: 1; padding: 10px 6px; font-size: 0.8em; text-align: center; }
+
+  .btn-abono,
+  .btn-nuevo-cliente,
+  .btn-buscar-factura,
+  #btnPausarVenta,
+  #btnVerPausadas,
+  #btnProductoExpress {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Tabla: permite deslizar hacia los lados en vez de aplastarse */
+  .fac-tabla-card { overflow-x: auto; }
+  table { min-width: 560px; }
+
+  .fac-totales-card { justify-content: center; text-align: center; }
   .total-final { border-left: none; padding-left: 0; }
+
+  .fac-acciones { flex-direction: column; }
+  .fac-acciones button { width: 100%; }
+
   .fac-status-bar { flex-direction: column; gap: 6px; }
+
+  /* Modales: ocupan casi todo el ancho de la pantalla, nunca más */
+  .abono-modal,
+  .pago-modal,
+  .fac-factura-imprimir {
+    width: 94vw;
+    max-width: 94vw;
+    padding: 18px;
+  }
+
+  .fac-print-botones { flex-direction: column; }
+  .fac-print-botones button { width: 100%; }
 }
