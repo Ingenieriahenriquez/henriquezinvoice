@@ -177,7 +177,7 @@ function renderUsuarios(lista) {
       <td>${u.telefono || "—"}</td>
       <td><span class="tag-rol rol-${u.rol}">${ROLES_INFO[u.rol] || u.rol}</span></td>
       <td>${u.activo ? '<span class="tag-activo">Activo</span>' : '<span class="tag-inactivo">Inactivo</span>'}</td>
-      <td>${puedeEditar ? `<button class="btn-editar" data-id="${u.id}">Editar</button><button class="btn-reset" data-id="${u.id}">🔑 Restablecer</button>` : ""}</td>
+      <td>${puedeEditar ? `<div class="acciones-usuario"><button class="btn-editar" data-id="${u.id}">Editar</button><button class="btn-reset" data-id="${u.id}">🔑 Restablecer</button></div>` : ""}</td>
     `;
     cuerpo.appendChild(fila);
   });
