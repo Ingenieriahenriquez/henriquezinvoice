@@ -97,6 +97,26 @@
     </div>
   </div>
 
+  <!-- Restablecer contraseña -->
+  <div class="usr-overlay" id="overlayResetPass" style="display:none;">
+    <div class="usr-modal">
+      <div class="usr-modal-header">
+        <h3>🔑 Restablecer Contraseña</h3>
+        <button type="button" id="btnCerrarResetPass" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <p>Usuario: <strong id="resetNombreTitulo"></strong></p>
+
+      <label>Nueva contraseña</label>
+      <input type="text" id="resetNuevaContrasena" placeholder="Mínimo 6 caracteres">
+
+      <button type="button" id="btnGenerarPassAleatoria" class="btn-generar-pass">🎲 Generar contraseña aleatoria</button>
+
+      <p id="mensajeResetPass"></p>
+      <button type="button" id="btnConfirmarResetPass">💾 Guardar Nueva Contraseña</button>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="modulos-data.js"></script>
