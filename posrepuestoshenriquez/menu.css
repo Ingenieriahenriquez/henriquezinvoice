@@ -254,63 +254,111 @@ body, html {
     z-index: 250;
   }
 
-  .top-header {
-    padding: 12px 14px;
+  /* Evita que cualquier elemento empuje la página más ancha que la pantalla */
+  html, body {
+    overflow-x: hidden;
+  }
+  .menu-body, .layout, .main-area {
+    max-width: 100vw;
   }
 
-  .user-info { font-size: 0.85em; }
-  .datetime { font-size: 0.8em; }
+  .top-header {
+    padding: 12px 56px 12px 14px; /* espacio a la derecha para no chocar con "Salir" */
+    gap: 8px;
+  }
+
+  .user-info {
+    font-size: 0.82em;
+    min-width: 0;
+  }
+  .datetime { font-size: 0.75em; }
 
   #btnSalir {
-    padding: 8px 14px;
-    font-size: 0.85em;
+    top: 10px;
+    right: 10px;
+    padding: 7px 12px;
+    font-size: 0.8em;
+    border-radius: 6px;
   }
 
-  .welcome { padding: 20px 14px 8px 14px; }
-  .welcome h1 { font-size: 1.2em; }
+  .welcome { padding: 18px 16px 6px 16px; }
+  .welcome h1 { font-size: 1.15em; }
   .welcome p { font-size: 0.85em; }
 
-  /* Tarjetas: una sola columna, ícono a la izquierda y texto a la derecha */
+  /* Tarjetas: 2 columnas, color sólido por módulo, ícono arriba y nombre debajo (estilo app) */
   .menu-grid {
-    grid-template-columns: 1fr;
-    padding: 14px;
+    grid-template-columns: 1fr 1fr;
+    padding: 14px 14px 90px 14px; /* espacio abajo para no tapar con la barra de contacto */
     gap: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .menu-item {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 16px;
+    min-height: 118px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
 
   .menu-item:hover {
     transform: none;
   }
 
+  /* La descripción larga no cabe en la tarjeta de color; se oculta en celular */
+  .menu-item p {
+    display: none;
+  }
+
   .icono-badge {
-    width: 56px;
-    height: 56px;
-    font-size: 1.7em;
+    width: 46px;
+    height: 46px;
+    font-size: 1.5em;
     margin-bottom: 0;
-    flex-shrink: 0;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.22) !important;
   }
 
   .menu-item:hover .icono-badge {
     transform: none;
   }
 
-  .menu-item h3 { font-size: 1em; }
-  .menu-item p { font-size: 0.8em; }
+  .menu-item h3 {
+    color: white;
+    font-size: 0.92em;
+    line-height: 1.25;
+    margin: 0;
+  }
 
-  /* Aviso de contacto: barra fija abajo, ancho completo, no tapa las tarjetas */
+  /* Color sólido de cada tarjeta según su categoría (mismos colores del ícono, más fuertes) */
+  .menu-item:has(.badge-verde)     { background: linear-gradient(135deg, #22c55e, #15803d); }
+  .menu-item:has(.badge-morado)    { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .menu-item:has(.badge-rosado)    { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+  .menu-item:has(.badge-azul)      { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+  .menu-item:has(.badge-amarillo)  { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  .menu-item:has(.badge-rojo)      { background: linear-gradient(135deg, #e63946, #9d0208); }
+  .menu-item:has(.badge-naranja)   { background: linear-gradient(135deg, #f97316, #c2410c); }
+
+  /* Aviso de contacto: barra delgada fija abajo, estilo app profesional */
   .contact-badge {
-    position: static;
-    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
     width: 100%;
     box-sizing: border-box;
     border-radius: 0;
     text-align: center;
-    margin-top: 10px;
+    padding: 12px 16px;
+    z-index: 150;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
   }
 }
