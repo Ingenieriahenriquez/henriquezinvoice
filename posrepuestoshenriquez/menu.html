@@ -11,13 +11,17 @@
 
   <div class="layout">
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-title">📋 Menú Principal</div>
       <nav class="sidebar-nav" id="sidebarNav"></nav>
     </aside>
 
+    <!-- Fondo oscuro que aparece detrás del panel lateral en celular -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="main-area">
       <header class="top-header">
+        <button id="btnMenuMovil" class="btn-menu-movil" aria-label="Abrir menú" type="button">☰</button>
         <div class="user-info">👤 <span id="nombreUsuario">Ing. Henríquez</span> — Administrador del Sistema</div>
         <div class="datetime" id="fechaHora"></div>
         <button id="btnSalir">Salir</button>
@@ -39,5 +43,38 @@
   <script src="config.js"></script>
   <script src="modulos-data.js"></script>
   <script src="menu.js"></script>
+
+  <!-- Abre/cierra el panel lateral en celular (no afecta la vista de computadora) -->
+  <script>
+    (function () {
+      var btnMenuMovil = document.getElementById("btnMenuMovil");
+      var sidebar = document.getElementById("sidebar");
+      var overlay = document.getElementById("sidebarOverlay");
+
+      function abrirMenu() {
+        sidebar.classList.add("sidebar-abierta");
+        overlay.classList.add("visible");
+      }
+
+      function cerrarMenu() {
+        sidebar.classList.remove("sidebar-abierta");
+        overlay.classList.remove("visible");
+      }
+
+      if (btnMenuMovil) {
+        btnMenuMovil.addEventListener("click", function () {
+          if (sidebar.classList.contains("sidebar-abierta")) {
+            cerrarMenu();
+          } else {
+            abrirMenu();
+          }
+        });
+      }
+
+      if (overlay) {
+        overlay.addEventListener("click", cerrarMenu);
+      }
+    })();
+  </script>
 </body>
 </html>
