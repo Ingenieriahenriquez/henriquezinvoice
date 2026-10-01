@@ -177,7 +177,7 @@ function renderUsuarios(lista) {
       <td>${u.telefono || "—"}</td>
       <td><span class="tag-rol rol-${u.rol}">${ROLES_INFO[u.rol] || u.rol}</span></td>
       <td>${u.activo ? '<span class="tag-activo">Activo</span>' : '<span class="tag-inactivo">Inactivo</span>'}</td>
-      <td>${puedeEditar ? `<button class="btn-editar" data-id="${u.id}">Editar</button>` : ""}</td>
+      <td>${puedeEditar ? `<button class="btn-editar" data-id="${u.id}">Editar</button><button class="btn-reset" data-id="${u.id}">🔑 Restablecer</button>` : ""}</td>
     `;
     cuerpo.appendChild(fila);
   });
@@ -186,6 +186,13 @@ function renderUsuarios(lista) {
     btn.addEventListener("click", () => {
       const usuario = usuariosCache.find((u) => u.id === btn.dataset.id);
       abrirEdicion(usuario);
+    });
+  });
+
+  document.querySelectorAll(".btn-reset").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const usuario = usuariosCache.find((u) => u.id === btn.dataset.id);
+      abrirResetPassword(usuario);
     });
   });
 }
@@ -245,6 +252,73 @@ document.getElementById("btnGuardarEdicion").addEventListener("click", async () 
 
   overlayEditar.style.display = "none";
   cargarUsuarios();
+});
+
+// ================= RESTABLECER CONTRASEÑA =================
+const overlayResetPass = document.getElementById("overlayResetPass");
+const mensajeResetPass = document.getElementById("mensajeResetPass");
+let usuarioParaResetPass = null;
+
+function abrirResetPassword(usuario) {
+  usuarioParaResetPass = usuario;
+  document.getElementById("resetNombreTitulo").textContent = usuario.nombre_completo;
+  document.getElementById("resetNuevaContrasena").value = "";
+  mensajeResetPass.style.color = "#b00020";
+  mensajeResetPass.textContent = "";
+  overlayResetPass.style.display = "flex";
+}
+
+document.getElementById("btnCerrarResetPass").addEventListener("click", () => {
+  overlayResetPass.style.display = "none";
+});
+
+document.getElementById("btnGenerarPassAleatoria").addEventListener("click", () => {
+  const caracteres = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+  let nueva = "";
+  for (let i = 0; i < 10; i++) {
+    nueva += caracteres[Math.floor(Math.random() * caracteres.length)];
+  }
+  document.getElementById("resetNuevaContrasena").value = nueva;
+});
+
+document.getElementById("btnConfirmarResetPass").addEventListener("click", async () => {
+  mensajeResetPass.style.color = "#b00020";
+  const nuevaContrasena = document.getElementById("resetNuevaContrasena").value;
+
+  if (!nuevaContrasena || nuevaContrasena.length < 6) {
+    mensajeResetPass.textContent = "La contraseña debe tener al menos 6 caracteres.";
+    return;
+  }
+
+  mensajeResetPass.style.color = "#555";
+  mensajeResetPass.textContent = "Guardando...";
+
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+
+  const { data, error } = await supabaseClient.functions.invoke("reset-password", {
+    body: {
+      user_id: usuarioParaResetPass.id,
+      new_password: nuevaContrasena
+    },
+    headers: {
+      Authorization: "Bearer " + sessionData.session.access_token
+    }
+  });
+
+  if (error) {
+    mensajeResetPass.style.color = "#b00020";
+    mensajeResetPass.textContent = "Error: " + error.message;
+    return;
+  }
+
+  if (data && data.error) {
+    mensajeResetPass.style.color = "#b00020";
+    mensajeResetPass.textContent = "Error: " + data.error;
+    return;
+  }
+
+  mensajeResetPass.style.color = "#16a34a";
+  mensajeResetPass.textContent = "✔ Contraseña actualizada. Nueva contraseña: " + nuevaContrasena;
 });
 
 iniciar();
