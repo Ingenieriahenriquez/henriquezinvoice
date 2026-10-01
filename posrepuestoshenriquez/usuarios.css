@@ -154,10 +154,36 @@ tbody tr:hover { background: #f8fafc; }
   cursor: pointer;
   font-size: 0.82em;
   font-weight: bold;
-  margin-left: 6px;
   white-space: nowrap;
 }
 .btn-reset:hover { background: #b45309; }
+
+/* Caja que agrupa Editar + Restablecer en la tabla, uno al lado del otro.
+   Usamos selectores más específicos que ".usr-card button" para que estos
+   botones chicos NO hereden el estilo grande del botón "Registrar Usuario". */
+.acciones-usuario {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.acciones-usuario button.btn-editar,
+.acciones-usuario button.btn-reset {
+  width: auto;
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 0.82em;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.acciones-usuario button.btn-editar { background: #2563eb; color: white; }
+.acciones-usuario button.btn-editar:hover { background: #1d4ed8; }
+
+.acciones-usuario button.btn-reset { background: #f59e0b; color: white; }
+.acciones-usuario button.btn-reset:hover { background: #b45309; }
 
 /* ---------- Modal editar / restablecer ---------- */
 .usr-overlay {
