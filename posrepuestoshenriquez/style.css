@@ -1,6 +1,7 @@
 /* =========================================================
    LOGIN - Ingeniería & Tecnología Henríquez
    Estilo: "Liquid Glass" oscuro, vertical, con movimiento
+   Paleta: verde (igual a la del Menú Principal y el resto del sistema)
    ========================================================= */
 
 * {
@@ -22,11 +23,11 @@ body {
   position: relative;
   overflow: hidden;
 
-  /* Fondo azul oscuro degradado, como vidrio líquido */
-  background: radial-gradient(circle at 30% 20%, #16324f 0%, #0c1f36 38%, #060e1c 100%);
+  /* Fondo verde oscuro degradado, como vidrio líquido */
+  background: radial-gradient(circle at 30% 20%, #1b4332 0%, #123024 38%, #081712 100%);
 }
 
-/* Resplandores azules de fondo, en movimiento lento */
+/* Resplandores verdes de fondo, en movimiento lento */
 .glow {
   position: absolute;
   border-radius: 50%;
@@ -38,7 +39,7 @@ body {
 .glow-1 {
   width: 420px;
   height: 420px;
-  background: rgba(64, 156, 255, 0.35);
+  background: rgba(34, 197, 94, 0.35);
   top: 8%;
   left: -10%;
   animation: moverGlow1 12s ease-in-out infinite;
@@ -47,7 +48,7 @@ body {
 .glow-2 {
   width: 460px;
   height: 460px;
-  background: rgba(45, 200, 255, 0.28);
+  background: rgba(21, 128, 61, 0.30);
   bottom: -12%;
   right: -8%;
   animation: moverGlow2 14s ease-in-out infinite;
@@ -56,7 +57,7 @@ body {
 .glow-3 {
   width: 320px;
   height: 320px;
-  background: rgba(120, 190, 255, 0.22);
+  background: rgba(74, 222, 128, 0.22);
   top: 42%;
   right: 12%;
   animation: moverGlow1 10s ease-in-out infinite reverse;
@@ -98,7 +99,7 @@ body {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.05) inset,
     0 25px 60px rgba(0, 0, 0, 0.45),
-    0 0 55px rgba(64, 156, 255, 0.18);
+    0 0 55px rgba(34, 197, 94, 0.18);
 
   animation: apareceLogin 0.7s ease, flotar 7s ease-in-out 0.7s infinite;
 }
@@ -132,21 +133,21 @@ body {
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.05) inset,
       0 25px 60px rgba(0, 0, 0, 0.45),
-      0 0 55px rgba(64, 156, 255, 0.18);
+      0 0 55px rgba(34, 197, 94, 0.18);
   }
   50% {
     transform: translateY(-12px);
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.07) inset,
       0 38px 75px rgba(0, 0, 0, 0.5),
-      0 0 80px rgba(64, 156, 255, 0.3);
+      0 0 80px rgba(34, 197, 94, 0.3);
   }
   100% {
     transform: translateY(0);
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.05) inset,
       0 25px 60px rgba(0, 0, 0, 0.45),
-      0 0 55px rgba(64, 156, 255, 0.18);
+      0 0 55px rgba(34, 197, 94, 0.18);
   }
 }
 
@@ -154,7 +155,7 @@ body {
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.08) inset,
     0 42px 80px rgba(0, 0, 0, 0.55),
-    0 0 95px rgba(64, 156, 255, 0.38);
+    0 0 95px rgba(34, 197, 94, 0.38);
 }
 
 /* ============ ÍCONO CIRCULAR SUPERIOR ============ */
@@ -165,18 +166,18 @@ body {
   height: 86px;
   margin: 0 auto 26px;
   border-radius: 50%;
-  border: 1.5px solid rgba(120, 200, 255, 0.6);
-  background: radial-gradient(circle, rgba(64, 156, 255, 0.18), rgba(64, 156, 255, 0.02));
+  border: 1.5px solid rgba(110, 231, 159, 0.6);
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.18), rgba(34, 197, 94, 0.02));
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(64, 156, 255, 0.45);
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.45);
 }
 
 .login-icono svg {
   width: 40px;
   height: 40px;
-  stroke: #bfe3ff;
+  stroke: #bdf5d3;
 }
 
 .login-box h1,
@@ -186,7 +187,7 @@ body {
   margin: 0 0 6px;
   font-size: 22px;
   font-weight: 700;
-  color: #eaf5ff;
+  color: #eafff2;
   letter-spacing: 0.3px;
 }
 
@@ -196,7 +197,7 @@ body {
   z-index: 1;
   margin: 0 0 30px;
   font-size: 13.5px;
-  color: rgba(200, 225, 245, 0.75);
+  color: rgba(200, 235, 215, 0.75);
 }
 
 /* ============ CAMPOS CON ÍCONO ============ */
@@ -230,7 +231,7 @@ form {
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  stroke: rgba(190, 220, 245, 0.8);
+  stroke: rgba(190, 235, 210, 0.8);
   pointer-events: none;
 }
 
@@ -242,22 +243,22 @@ form {
   width: 100%;
   padding: 15px 16px 15px 46px;
   font-size: 14.5px;
-  color: #eaf5ff;
-  background: rgba(10, 30, 55, 0.55);
-  border: 1px solid rgba(140, 190, 230, 0.25);
+  color: #eafff2;
+  background: rgba(10, 40, 30, 0.55);
+  border: 1px solid rgba(140, 210, 170, 0.25);
   border-radius: 16px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .login-box input::placeholder {
-  color: rgba(180, 210, 235, 0.55);
+  color: rgba(180, 220, 195, 0.55);
 }
 
 .login-box input:focus {
-  border-color: rgba(120, 200, 255, 0.7);
-  background: rgba(10, 30, 55, 0.75);
-  box-shadow: 0 0 0 4px rgba(64, 156, 255, 0.18);
+  border-color: rgba(110, 231, 159, 0.7);
+  background: rgba(10, 40, 30, 0.75);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
 }
 
 /* ============ FILA RECORDARME / OLVIDÓ ============ */
@@ -270,7 +271,7 @@ form {
   justify-content: space-between;
   margin: 4px 0 26px;
   font-size: 12.5px;
-  color: rgba(200, 225, 245, 0.75);
+  color: rgba(200, 235, 215, 0.75);
 }
 
 .login-opciones label {
@@ -281,13 +282,13 @@ form {
 }
 
 .login-opciones input[type="checkbox"] {
-  accent-color: #4a9cff;
+  accent-color: #22c55e;
   width: 14px;
   height: 14px;
 }
 
 .login-opciones a {
-  color: #7fc4ff;
+  color: #6ee7a0;
   text-decoration: none;
   font-style: italic;
 }
@@ -307,19 +308,19 @@ form {
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: #eaf5ff;
-  background: linear-gradient(135deg, rgba(64, 156, 255, 0.85), rgba(20, 90, 170, 0.9));
-  border: 1px solid rgba(140, 200, 255, 0.4);
+  color: #eafff2;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(27, 67, 50, 0.95));
+  border: 1px solid rgba(110, 231, 159, 0.4);
   border-radius: 16px;
   cursor: pointer;
-  box-shadow: 0 10px 26px rgba(20, 90, 170, 0.45), 0 0 30px rgba(64, 156, 255, 0.25);
+  box-shadow: 0 10px 26px rgba(27, 67, 50, 0.5), 0 0 30px rgba(34, 197, 94, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .login-box button:hover,
 #btnLogin:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(20, 90, 170, 0.55), 0 0 45px rgba(64, 156, 255, 0.4);
+  box-shadow: 0 16px 34px rgba(27, 67, 50, 0.6), 0 0 45px rgba(34, 197, 94, 0.4);
   filter: brightness(1.08);
 }
 
@@ -348,7 +349,7 @@ form {
   z-index: 1;
   margin-top: 24px;
   font-size: 11.5px;
-  color: rgba(180, 205, 230, 0.5);
+  color: rgba(180, 220, 195, 0.5);
 }
 
 /* Responsivo */
