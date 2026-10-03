@@ -160,7 +160,6 @@
   <div class="fac-print-overlay" id="overlayFactura" style="display:none;">
     <p class="fac-guardada-banner">✔ Factura guardada en el sistema</p>
     <div class="fac-factura-imprimir" id="facturaImprimir">
-      <img id="pfLogo" src="" alt="" style="display:none; max-width:120px; margin:0 auto 8px auto; display:block;">
       <h2 id="pfEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
       <p id="pfEmpresaEslogan" style="display:none;"></p>
       <p id="pfEmpresaTelefono">Tel: 849-393-6337</p>
@@ -181,15 +180,20 @@
         <tbody id="pfCuerpo"></tbody>
       </table>
       <hr>
-      <p>Subtotal: <span id="pfSubtotal"></span></p>
-      <p>ITBIS: <span id="pfItbis"></span></p>
-      <p><strong>Total: <span id="pfTotal"></span></strong></p>
+      <div style="margin-left:auto; width:max-content; text-align:right;">
+        <p style="margin:2px 0;">Subtotal: <span id="pfSubtotal"></span></p>
+        <p style="margin:2px 0;">ITBIS: <span id="pfItbis"></span></p>
+        <p style="margin:2px 0; font-size:1.1em;"><strong>Total: <span id="pfTotal"></span></strong></p>
+      </div>
       <p>Forma de pago: <span id="pfFormaPago"></span></p>
       <p id="pfLineaMonto" style="display:none;">Monto recibido: <span id="pfMontoRecibido"></span></p>
       <p id="pfLineaCambio" style="display:none;">Cambio: <span id="pfCambio"></span></p>
       <hr>
-      <div id="pfQrContenedor" style="display:none;">
-        <img id="pfQr" src="" alt="">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px;">
+        <img id="pfLogo" src="" alt="" style="display:none; max-width:70px; max-height:70px;">
+        <div id="pfQrContenedor" style="display:none; margin-left:auto;">
+          <img id="pfQr" src="" alt="" style="max-width:70px; max-height:70px;">
+        </div>
       </div>
       <p class="fac-aviso">Revise su factura. Piezas eléctricas no tienen garantía. Sin factura no se hacen devoluciones ni cambios.</p>
     </div>
