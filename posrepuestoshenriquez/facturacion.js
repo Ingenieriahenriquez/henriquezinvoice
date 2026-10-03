@@ -205,7 +205,7 @@ buscadorProd.addEventListener("input", async () => {
   const { data, error } = await supabaseClient
     .from("productos")
     .select("*")
-    .or(`descripcion.ilike.%${texto}%,marca.ilike.%${texto}%,codigo_manual.ilike.%${texto}%,codigo_barras.ilike.%${texto}%`)
+    .or(`descripcion.ilike.%${texto}%,marca.ilike.%${texto}%,codigo_manual.ilike.%${texto}%,codigo_barras.ilike.%${texto}%,referencia.ilike.%${texto}%`)
     .limit(8);
 
   if (error) { resultadosProd.innerHTML = "Error: " + error.message; return; }
@@ -213,7 +213,7 @@ buscadorProd.addEventListener("input", async () => {
   data.forEach((p) => {
     const div = document.createElement("div");
     div.className = "resultado-item";
-    div.innerHTML = `<strong>${p.descripcion}</strong><br>${formatearMonto(p.precio_venta)} — Existencia: ${p.existencia}`;
+    div.innerHTML = `<strong>${p.descripcion}</strong>${p.referencia ? " — Ref: " + p.referencia : ""}<br>${formatearMonto(p.precio_venta)} — Existencia: ${p.existencia}`;
     div.addEventListener("click", () => {
       agregarAlCarrito(p);
       buscadorProd.value = "";
@@ -231,6 +231,7 @@ function agregarAlCarrito(producto) {
     carrito.push({
       producto_id: producto.id,
       descripcion: producto.descripcion,
+      referencia: producto.referencia || "—",
       codigo: producto.codigo_manual || producto.codigo_barras || "—",
       precio_unitario: Number(producto.precio_venta),
       cantidad: 1
@@ -246,7 +247,7 @@ function renderCarrito() {
     for (let i = 1; i <= 4; i++) {
       const fila = document.createElement("tr");
       fila.className = "fila-vacia";
-      fila.innerHTML = `<td class="col-num">${i}</td><td colspan="6"></td>`;
+      fila.innerHTML = `<td class="col-num">${i}</td><td colspan="7"></td>`;
       cuerpoCarrito.appendChild(fila);
     }
   }
@@ -257,6 +258,7 @@ function renderCarrito() {
     fila.innerHTML = `
       <td class="col-num">${index + 1}</td>
       <td>${item.descripcion}</td>
+      <td>${item.referencia || "—"}</td>
       <td>${item.codigo}</td>
       <td><input type="number" class="cant-input" min="1" value="${item.cantidad}" data-index="${index}"></td>
       <td class="monto-negrita">${formatearMonto(item.precio_unitario)}</td>
@@ -1160,6 +1162,7 @@ const overlayProductoExpress = document.getElementById("overlayProductoExpress")
 const peMensaje = document.getElementById("peMensaje");
 
 document.getElementById("btnProductoExpress").addEventListener("click", () => {
+  document.getElementById("peReferencia").value = "";
   document.getElementById("peCodigo").value = "";
   document.getElementById("peDescripcion").value = "";
   document.getElementById("peCantidad").value = "1";
@@ -1178,6 +1181,7 @@ document.getElementById("btnAgregarProductoExpress").addEventListener("click", (
   const cantidad = parseInt(document.getElementById("peCantidad").value) || 0;
   const precio = parseFloat(document.getElementById("pePrecio").value);
   const codigo = document.getElementById("peCodigo").value.trim();
+  const referencia = document.getElementById("peReferencia").value.trim();
 
   peMensaje.textContent = "";
 
@@ -1197,6 +1201,7 @@ document.getElementById("btnAgregarProductoExpress").addEventListener("click", (
   carrito.push({
     producto_id: null,
     descripcion: descripcion,
+    referencia: referencia || "—",
     codigo: codigo || "EXPRESS",
     precio_unitario: precio,
     cantidad: cantidad
