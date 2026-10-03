@@ -30,6 +30,7 @@ function renderTabla(lista) {
       <td>${p.descripcion}</td>
       <td>${p.marca || ""}</td>
       <td>${p.modelo || ""}</td>
+      <td>${p.referencia || ""}</td>
       <td>${p.codigo_manual || p.codigo_barras || ""}</td>
       <td>$${Number(p.precio_venta).toFixed(2)}</td>
       <td>${p.existencia}</td>
@@ -82,6 +83,7 @@ buscador.addEventListener("input", () => {
   const filtrados = productosCache.filter((p) =>
     (p.descripcion || "").toLowerCase().includes(texto) ||
     (p.marca || "").toLowerCase().includes(texto) ||
+    (p.referencia || "").toLowerCase().includes(texto) ||
     (p.codigo_manual || "").toLowerCase().includes(texto) ||
     (p.codigo_barras || "").toLowerCase().includes(texto)
   );
