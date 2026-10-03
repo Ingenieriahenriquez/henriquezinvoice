@@ -6,6 +6,7 @@ const cuerpoCarrito = document.getElementById("cuerpoCarrito");
 const txtSubtotal = document.getElementById("txtSubtotal");
 const txtItbis = document.getElementById("txtItbis");
 const txtTotal = document.getElementById("txtTotal");
+const chkAplicarItbis = document.getElementById("chkAplicarItbis");
 const mensajeFactura = document.getElementById("mensajeFactura");
 const btnGenerarFactura = document.getElementById("btnGenerarFactura");
 const btnCancelarVenta = document.getElementById("btnCancelarVenta");
@@ -49,6 +50,16 @@ function formatearMonto(numero) {
 fechaFactura.textContent = new Date().toLocaleDateString("es-DO", { day: "2-digit", month: "2-digit", year: "numeric" });
 
 renderCarrito();
+
+// El ITBIS viene APAGADO por defecto (checkbox sin marcar en el HTML).
+// Al marcar/desmarcar, recalcula los totales en pantalla al instante.
+chkAplicarItbis.addEventListener("change", () => {
+  const { total } = calcularTotales();
+  // Si el modal de confirmar pago está abierto, actualiza el total ahí también
+  if (overlayPago.style.display === "flex") {
+    pagoTotal.textContent = formatearMonto(total);
+  }
+});
 
 // Carga los datos de la empresa desde Configuración y los aplica a los documentos imprimibles
 async function cargarDatosEmpresaImpresion() {
@@ -275,9 +286,13 @@ function renderCarrito() {
   calcularTotales();
 }
 
+// El ITBIS solo se aplica si el interruptor "Aplicar ITBIS (18%)" está marcado.
+// Por defecto viene apagado (desmarcado en el HTML), así que una factura
+// nueva sale sin ITBIS a menos que se active a propósito.
 function calcularTotales() {
   const subtotal = carrito.reduce((acc, item) => acc + item.precio_unitario * item.cantidad, 0);
-  const itbis = subtotal * 0.18;
+  const aplicarItbis = chkAplicarItbis.checked;
+  const itbis = aplicarItbis ? subtotal * 0.18 : 0;
   const total = subtotal + itbis;
   txtSubtotal.textContent = formatearMonto(subtotal);
   txtItbis.textContent = formatearMonto(itbis);
@@ -290,6 +305,7 @@ btnCancelarVenta.addEventListener("click", () => {
   if (carrito.length === 0) return;
   if (confirm("¿Cancelar esta venta y vaciar el carrito?")) {
     carrito = [];
+    chkAplicarItbis.checked = false;
     renderCarrito();
     mensajeFactura.textContent = "";
   }
@@ -554,6 +570,7 @@ document.getElementById("btnImprimirFactura").addEventListener("click", () => {
 
 document.getElementById("btnNuevaVenta").addEventListener("click", () => {
   carrito = [];
+  chkAplicarItbis.checked = false;
   renderCarrito();
   nombreCliente.value = "Consumidor Final";
   clienteCedula.value = "";
@@ -968,6 +985,7 @@ function capturarEstadoVentaActual(etiqueta) {
     etiqueta: etiqueta,
     horaPausada: new Date().toISOString(),
     carrito: JSON.parse(JSON.stringify(carrito)),
+    aplicarItbis: chkAplicarItbis.checked,
     cliente: {
       nombre: nombreCliente.value,
       id: clienteSeleccionadoId,
@@ -985,6 +1003,7 @@ function capturarEstadoVentaActual(etiqueta) {
 
 function limpiarPantallaVenta() {
   carrito = [];
+  chkAplicarItbis.checked = false;
   renderCarrito();
   nombreCliente.value = "Consumidor Final";
   clienteCedula.value = "";
@@ -1042,7 +1061,7 @@ function renderListaVentasPausadas() {
 
   ventasPausadas.forEach((v) => {
     const subtotalVenta = v.carrito.reduce((acc, item) => acc + item.precio_unitario * item.cantidad, 0);
-    const totalVenta = subtotalVenta * 1.18;
+    const totalVenta = subtotalVenta * (v.aplicarItbis ? 1.18 : 1);
 
     const div = document.createElement("div");
     div.className = "abono-item";
@@ -1099,6 +1118,7 @@ function retomarVentaPausada(id) {
   }
 
   carrito = JSON.parse(JSON.stringify(venta.carrito));
+  chkAplicarItbis.checked = !!venta.aplicarItbis;
   renderCarrito();
 
   nombreCliente.value = venta.cliente.nombre || "Consumidor Final";
