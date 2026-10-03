@@ -1,93 +1,419 @@
-verificarAccesoModulo(["inventario", "producto"]);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Facturación — Ingeniería & Tecnología Henríquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="facturacion.css">
+</head>
+<body class="fac-body">
 
-const form = document.getElementById("formProducto");
-const cuerpoTabla = document.getElementById("cuerpoTabla");
-const mensajeForm = document.getElementById("mensajeForm");
-const buscador = document.getElementById("buscador");
+  <header class="fac-header">
+    <a href="menu.html" class="btn-volver">← Volver al Menú</a>
+    <h2>🧾 Facturación</h2>
+    <div class="proximo-numero" id="proximoNumeroBadge">Próxima Factura: #—</div>
+  </header>
 
-let productosCache = [];
+  <div class="fac-wrap">
 
-async function cargarProductos() {
-  const { data, error } = await supabaseClient
-    .from("productos")
-    .select("*")
-    .order("creado_en", { ascending: false });
+    <!-- Fila 1: cliente, comprobante, fecha -->
+    <div class="fac-toolbar">
+      <div class="campo-cliente-wrap">
+        <div class="campo-cliente">
+          <span class="icono-campo">🔍</span>
+          <input type="text" id="nombreCliente" value="Consumidor Final" placeholder="Buscar o escribir cliente...">
+          <button type="button" id="btnToggleDatosCliente" title="Datos adicionales del cliente">＋</button>
+        </div>
+        <div id="resultadosCliente"></div>
+      </div>
 
-  if (error) {
-    mensajeForm.textContent = "Error al cargar: " + error.message;
-    return;
-  }
-  productosCache = data;
-  renderTabla(productosCache);
-}
+      <select id="tipoComprobante">
+        <option value="E32" selected>E32 - Factura de Consumo</option>
+        <option value="E31">E31 - Crédito Fiscal</option>
+        <option value="E33">E33 - Nota de Débito</option>
+        <option value="E34">E34 - Nota de Crédito</option>
+        <option value="E45">E45 - Gubernamental</option>
+        <option value="E44">E44 - Regímenes Especiales</option>
+        <option value="E46">E46 - Exportaciones</option>
+      </select>
 
-function renderTabla(lista) {
-  cuerpoTabla.innerHTML = "";
-  lista.forEach((p) => {
-    const fila = document.createElement("tr");
-    if (p.existencia <= p.stock_minimo) fila.classList.add("stock-bajo");
-    fila.innerHTML = `
-      <td>${p.descripcion}</td>
-      <td>${p.marca || ""}</td>
-      <td>${p.modelo || ""}</td>
-      <td>${p.referencia || ""}</td>
-      <td>${p.codigo_manual || p.codigo_barras || ""}</td>
-      <td>$${Number(p.precio_venta).toFixed(2)}</td>
-      <td>${p.existencia}</td>
-      <td><button class="btn-eliminar" data-id="${p.id}">Eliminar</button></td>
-    `;
-    cuerpoTabla.appendChild(fila);
-  });
+      <div class="campo-fecha" id="fechaFactura"></div>
+    </div>
 
-  document.querySelectorAll(".btn-eliminar").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      if (confirm("¿Eliminar este producto?")) {
-        await supabaseClient.from("productos").delete().eq("id", btn.dataset.id);
-        cargarProductos();
-      }
-    });
-  });
-}
+    <!-- Datos adicionales del cliente (colapsable, opcional) -->
+    <div class="fac-datos-cliente" id="panelDatosCliente">
+      <input type="text" id="clienteCedula" placeholder="🪪 Cédula/RNC (opcional)">
+      <input type="text" id="clienteWhatsapp" placeholder="📱 WhatsApp (opcional)">
+      <input type="text" id="clienteDireccion" placeholder="📍 Dirección (opcional)">
+      <input type="text" id="clienteSector" placeholder="🏘️ Sector (opcional)">
+      <input type="text" id="clienteReferencia" placeholder="📌 Punto de referencia / próx. a... (opcional)">
+    </div>
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  mensajeForm.textContent = "";
+    <!-- Fila 2: forma de pago y condición -->
+    <div class="fac-toolbar-2">
+      <div class="toggle-grupo" id="pagoToggle">
+        <button type="button" class="toggle-btn activo" data-pago="Efectivo">💵 Efectivo</button>
+        <button type="button" class="toggle-btn" data-pago="Tarjeta Crédito">💳 Tarjeta</button>
+        <button type="button" class="toggle-btn" data-pago="Transferencia">🏦 Transf.</button>
+        <button type="button" class="toggle-btn" data-pago="Cheque">📝 Cheque</button>
+      </div>
 
-  const nuevoProducto = {
-    descripcion: document.getElementById("descripcion").value,
-    marca: document.getElementById("marca").value,
-    modelo: document.getElementById("modelo").value,
-    anio_vehiculo: document.getElementById("anio_vehiculo").value,
-    referencia: document.getElementById("referencia").value,
-    codigo_manual: document.getElementById("codigo_manual").value,
-    codigo_barras: document.getElementById("codigo_barras").value,
-    categoria: document.getElementById("categoria").value,
-    precio_costo: parseFloat(document.getElementById("precio_costo").value) || 0,
-    precio_venta: parseFloat(document.getElementById("precio_venta").value) || 0,
-    existencia: parseInt(document.getElementById("existencia").value) || 0,
-    stock_minimo: parseInt(document.getElementById("stock_minimo").value) || 0
-  };
+      <div class="toggle-grupo" id="condicionToggle">
+        <button type="button" class="toggle-btn activo condicion-contado" data-condicion="Contado">Contado</button>
+        <button type="button" class="toggle-btn condicion-credito" data-condicion="Crédito">Crédito</button>
+      </div>
 
-  const { error } = await supabaseClient.from("productos").insert(nuevoProducto);
+      <button type="button" id="btnAbrirAbono" class="btn-abono">💳 Abonar a Factura de Crédito</button>
+      <button type="button" id="btnAbrirNuevoCliente" class="btn-nuevo-cliente">➕ Registrar Cliente Nuevo</button>
+      <button type="button" id="btnAbrirBuscarFactura" class="btn-buscar-factura">🔎 Buscar / Reimprimir Factura</button>
+      <button type="button" id="btnPausarVenta" class="btn-nuevo-cliente">⏸ Pausar Venta</button>
+      <button type="button" id="btnVerPausadas" class="btn-buscar-factura">
+        🗂 Ventas en Pausa
+        <span id="badgePausadas" style="display:none; background:#b00020; color:white; border-radius:50%; padding:1px 7px; font-size:0.8em; margin-left:4px;"></span>
+      </button>
+    </div>
 
-  if (error) {
-    mensajeForm.textContent = "Error: " + error.message;
-  } else {
-    form.reset();
-    cargarProductos();
-  }
-});
+    <!-- Buscador de producto -->
+    <div class="fac-buscador-card">
+      <div class="campo-cliente">
+        <span class="icono-campo">🔍</span>
+        <input type="text" id="buscadorProd" placeholder="Buscar producto por nombre, marca o código para agregar... (F11)">
+      </div>
+      <div id="resultadosProd"></div>
+      <button type="button" id="btnProductoExpress" class="btn-nuevo-cliente" style="margin-top:10px;">➕ Producto Express</button>
+    </div>
 
-buscador.addEventListener("input", () => {
-  const texto = buscador.value.toLowerCase();
-  const filtrados = productosCache.filter((p) =>
-    (p.descripcion || "").toLowerCase().includes(texto) ||
-    (p.marca || "").toLowerCase().includes(texto) ||
-    (p.referencia || "").toLowerCase().includes(texto) ||
-    (p.codigo_manual || "").toLowerCase().includes(texto) ||
-    (p.codigo_barras || "").toLowerCase().includes(texto)
-  );
-  renderTabla(filtrados);
-});
+    <!-- Tabla tipo hoja de cálculo -->
+    <div class="fac-tabla-card">
+      <table id="tablaCarrito">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th>Producto</th>
+            <th>Referencia</th>
+            <th>Código</th>
+            <th class="col-cant">Cant.</th>
+            <th class="col-precio">Precio</th>
+            <th class="col-precio">Total</th>
+            <th class="col-accion"></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpoCarrito"></tbody>
+      </table>
+    </div>
 
-cargarProductos();
+    <!-- Totales -->
+    <div class="fac-totales-card">
+      <label for="chkAplicarItbis" style="display:flex; align-items:center; gap:8px; font-size:0.85em; color:#444; margin-bottom:10px; cursor:pointer; user-select:none;">
+        <input type="checkbox" id="chkAplicarItbis" style="width:16px; height:16px; cursor:pointer; margin:0;">
+        Aplicar ITBIS (18%)
+      </label>
+      <div class="totales-lineas">
+        <p>Subtotal <span id="txtSubtotal">$0.00</span></p>
+        <p>ITBIS <span id="txtItbis">$0.00</span></p>
+      </div>
+      <div class="total-final">
+        <span>Total</span>
+        <span id="txtTotal">$0.00</span>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="fac-acciones">
+      <button id="btnGenerarFactura" class="btn-facturar">✔ Facturar</button>
+      <button id="btnCancelarVenta" class="btn-cancelar">✕ Cancelar</button>
+    </div>
+    <p id="mensajeFactura"></p>
+
+    <!-- Barra de estado inferior -->
+    <div class="fac-status-bar">
+      <span id="statusItems">📦 0 items</span>
+      <span id="statusCondicion">🟢 Contado</span>
+      <span id="statusPago">💵 Efectivo</span>
+    </div>
+
+  </div>
+
+  <!-- Pantalla de confirmación de pago (antes de generar la factura) -->
+  <div class="fac-print-overlay" id="overlayPago" style="display:none;">
+    <div class="pago-modal">
+      <h3>Confirmar Pago</h3>
+      <div class="pago-linea">
+        <span>Total a pagar</span>
+        <span id="pagoTotal" class="pago-monto-total">$0.00</span>
+      </div>
+      <label for="montoRecibido">Monto recibido</label>
+      <input type="number" step="0.01" id="montoRecibido" placeholder="0.00">
+      <div class="pago-linea pago-cambio">
+        <span>Cambio a devolver</span>
+        <span id="pagoCambio">$0.00</span>
+      </div>
+      <p id="pagoMensaje"></p>
+      <div class="pago-botones">
+        <button id="btnConfirmarPago" class="btn-facturar">✔ Confirmar y Facturar</button>
+        <button id="btnCancelarPago" class="btn-cancelar">✕ Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pantalla de factura generada / imprimible -->
+  <div class="fac-print-overlay" id="overlayFactura" style="display:none;">
+    <p class="fac-guardada-banner">✔ Factura guardada en el sistema</p>
+    <div class="fac-factura-imprimir" id="facturaImprimir">
+      <img id="pfLogo" src="" alt="" style="display:none; max-width:120px; margin:0 auto 8px auto; display:block;">
+      <h2 id="pfEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
+      <p id="pfEmpresaEslogan" style="display:none;"></p>
+      <p id="pfEmpresaTelefono">Tel: 849-393-6337</p>
+      <p id="pfEmpresaRnc" style="display:none;"></p>
+      <hr>
+      <p><strong>Comprobante:</strong> <span id="pfTipo"></span></p>
+      <p><strong>No.:</strong> <span id="pfNumero"></span></p>
+      <p><strong>Fecha:</strong> <span id="pfFecha"></span></p>
+      <p><strong>Cliente:</strong> <span id="pfCliente"></span></p>
+      <p id="pfLineaCedula" style="display:none;"><strong>Cédula/RNC:</strong> <span id="pfCedula"></span></p>
+      <p id="pfLineaWhatsapp" style="display:none;"><strong>WhatsApp:</strong> <span id="pfWhatsapp"></span></p>
+      <p id="pfLineaDireccion" style="display:none;"><strong>Dirección:</strong> <span id="pfDireccion"></span></p>
+      <p id="pfLineaSector" style="display:none;"><strong>Sector:</strong> <span id="pfSector"></span></p>
+      <p id="pfLineaReferencia" style="display:none;"><strong>Referencia:</strong> <span id="pfReferencia"></span></p>
+      <hr>
+      <table id="pfTabla">
+        <thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th>Subtotal</th></tr></thead>
+        <tbody id="pfCuerpo"></tbody>
+      </table>
+      <hr>
+      <p>Subtotal: <span id="pfSubtotal"></span></p>
+      <p>ITBIS: <span id="pfItbis"></span></p>
+      <p><strong>Total: <span id="pfTotal"></span></strong></p>
+      <p>Forma de pago: <span id="pfFormaPago"></span></p>
+      <p id="pfLineaMonto" style="display:none;">Monto recibido: <span id="pfMontoRecibido"></span></p>
+      <p id="pfLineaCambio" style="display:none;">Cambio: <span id="pfCambio"></span></p>
+      <hr>
+      <div id="pfQrContenedor" style="display:none;">
+        <img id="pfQr" src="" alt="">
+      </div>
+      <p class="fac-aviso">Revise su factura. Piezas eléctricas no tienen garantía. Sin factura no se hacen devoluciones ni cambios.</p>
+    </div>
+
+    <div class="formato-fila">
+      <label for="formatoImpresion">Formato de impresión:</label>
+      <select id="formatoImpresion">
+        <option value="ticket" selected>🧾 Ticket POS (80mm)</option>
+        <option value="carta">📄 Carta (8.5" x 11")</option>
+      </select>
+    </div>
+
+    <div class="fac-print-botones">
+      <button id="btnGuardarSinImprimir" class="btn-guardar-sin-imprimir">💾 Guardar sin Imprimir</button>
+      <button id="btnImprimirFactura">🖶️ Imprimir</button>
+      <button id="btnNuevaVenta">Nueva Venta</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de Abonar a Factura de Crédito -->
+  <div class="fac-print-overlay" id="overlayAbono" style="display:none;">
+    <div class="abono-modal">
+      <div class="abono-modal-header">
+        <h3>💳 Abonar a Factura de Crédito</h3>
+        <button type="button" id="btnCerrarAbono" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <div id="abonoPasoBuscar">
+        <label>Buscar por nombre del cliente o teléfono/WhatsApp</label>
+        <input type="text" id="buscadorAbono" placeholder="🔍 Escribe el nombre o número...">
+        <div id="resultadosAbono"></div>
+      </div>
+
+      <div id="abonoPasoDetalle" style="display:none;">
+        <button type="button" id="btnVolverBusqueda" class="btn-link">← Buscar otra factura</button>
+
+        <div class="abono-detalle-card">
+          <p><strong>Cliente:</strong> <span id="abCliente"></span></p>
+          <p><strong>Factura No.:</strong> <span id="abNumero"></span></p>
+          <p><strong>Fecha:</strong> <span id="abFecha"></span></p>
+          <p><strong>Total:</strong> <span id="abTotal"></span></p>
+          <p><strong>Abonado:</strong> <span id="abAbonado"></span></p>
+          <p class="abono-saldo"><strong>Saldo pendiente:</strong> <span id="abSaldo"></span></p>
+        </div>
+
+        <label for="montoAbono">Monto a abonar</label>
+        <input type="number" step="0.01" id="montoAbono" placeholder="0.00">
+
+        <label for="formaPagoAbono">Forma de pago del abono</label>
+        <select id="formaPagoAbono">
+          <option>Efectivo</option>
+          <option>Tarjeta Crédito</option>
+          <option>Tarjeta Débito</option>
+          <option>Transferencia</option>
+          <option>Cheque</option>
+        </select>
+
+        <p id="abonoMensaje"></p>
+
+        <button type="button" id="btnRegistrarAbono" class="btn-facturar">✔ Registrar Abono</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pantalla de Registrar Cliente Nuevo -->
+  <div class="fac-print-overlay" id="overlayNuevoCliente" style="display:none;">
+    <div class="abono-modal">
+      <div class="abono-modal-header">
+        <h3>➕ Registrar Cliente Nuevo</h3>
+        <button type="button" id="btnCerrarNuevoCliente" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <label for="ncNombre">Nombre *</label>
+      <input type="text" id="ncNombre" placeholder="Nombre completo del cliente">
+
+      <label for="ncCedula">Cédula/RNC</label>
+      <input type="text" id="ncCedula" placeholder="Opcional">
+
+      <label for="ncWhatsapp">WhatsApp</label>
+      <input type="text" id="ncWhatsapp" placeholder="Opcional">
+
+      <label for="ncDireccion">Dirección</label>
+      <input type="text" id="ncDireccion" placeholder="Opcional">
+
+      <label for="ncSector">Sector</label>
+      <input type="text" id="ncSector" placeholder="Opcional">
+
+      <label for="ncReferencia">Punto de referencia</label>
+      <input type="text" id="ncReferencia" placeholder="Opcional">
+
+      <p id="ncMensaje"></p>
+
+      <button type="button" id="btnGuardarNuevoCliente" class="btn-facturar">✔ Guardar Cliente</button>
+    </div>
+  </div>
+
+  <!-- Recibo de Abono (imprimible) -->
+  <div class="fac-print-overlay" id="overlayReciboAbono" style="display:none;">
+    <div class="fac-factura-imprimir" id="reciboAbonoImprimir">
+      <img id="raLogo" src="" alt="" style="display:none; max-width:120px; margin:0 auto 8px auto;">
+      <h2 id="raEmpresaNombre">Ingeniería & Tecnología Henríquez</h2>
+      <p id="raEmpresaEslogan" style="display:none;"></p>
+      <p id="raEmpresaTelefono">Tel: 849-393-6337</p>
+      <p id="raEmpresaRnc" style="display:none;"></p>
+      <hr>
+      <p><strong>Comprobante de Abono</strong></p>
+      <p><strong>Fecha:</strong> <span id="raFecha"></span></p>
+      <p><strong>Cliente:</strong> <span id="raCliente"></span></p>
+      <p><strong>Factura relacionada:</strong> <span id="raFacturaNumero"></span></p>
+      <hr>
+      <p>Total de la factura: <span id="raTotalFactura"></span></p>
+      <p>Saldo anterior: <span id="raSaldoAnterior"></span></p>
+      <p><strong>Monto abonado: <span id="raMontoAbonado"></span></strong></p>
+      <p>Forma de pago: <span id="raFormaPago"></span></p>
+      <hr>
+      <p><strong>Nuevo saldo pendiente: <span id="raSaldoNuevo"></span></strong></p>
+    </div>
+    <div class="fac-print-botones">
+      <button id="btnImprimirAbono">🖶️ Imprimir Recibo</button>
+      <button id="btnCerrarReciboAbono">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Buscar / Reimprimir Factura -->
+  <div class="fac-print-overlay" id="overlayBuscarFactura" style="display:none;">
+    <div class="abono-modal">
+      <div class="abono-modal-header">
+        <h3>🔎 Buscar Factura</h3>
+        <button type="button" id="btnCerrarBuscarFactura" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <div id="bfPasoBuscar">
+        <label>Número de factura o nombre del cliente</label>
+        <input type="text" id="buscadorFactura" placeholder="🔍 Ej: 42 o nombre del cliente...">
+        <div id="resultadosBuscarFactura"></div>
+      </div>
+
+      <div id="bfPasoDetalle" style="display:none;">
+        <button type="button" id="btnVolverBuscarFactura" class="btn-link">← Buscar otra factura</button>
+
+        <div class="abono-detalle-card">
+          <p><strong>Factura No.:</strong> <span id="bfNumero"></span></p>
+          <p><strong>Fecha:</strong> <span id="bfFecha"></span></p>
+          <p><strong>Tipo:</strong> <span id="bfTipo"></span></p>
+          <p><strong>Cliente:</strong> <span id="bfCliente"></span></p>
+          <p><strong>Total:</strong> <span id="bfTotal"></span></p>
+          <p><strong>Forma de pago:</strong> <span id="bfFormaPago"></span></p>
+        </div>
+
+        <p class="bf-subtitulo">Datos adicionales del cliente (editable)</p>
+        <label>Cédula/RNC</label>
+        <input type="text" id="bfCedula">
+        <label>WhatsApp</label>
+        <input type="text" id="bfWhatsapp">
+        <label>Dirección</label>
+        <input type="text" id="bfDireccion">
+        <label>Sector</label>
+        <input type="text" id="bfSector">
+        <label>Punto de referencia</label>
+        <input type="text" id="bfReferencia">
+
+        <p id="bfMensaje"></p>
+
+        <div class="bf-botones">
+          <button type="button" id="btnGuardarCambiosFactura" class="btn-nuevo-cliente">💾 Guardar Cambios</button>
+          <button type="button" id="btnReimprimirFactura" class="btn-facturar">🖶️ Reimprimir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ventas en Pausa -->
+  <div class="fac-print-overlay" id="overlayVentasPausadas" style="display:none;">
+    <div class="abono-modal">
+      <div class="abono-modal-header">
+        <h3>🗂 Ventas en Pausa</h3>
+        <button type="button" id="btnCerrarVentasPausadas" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <p style="font-size:0.85em; color:#555;">
+        Estas son las ventas que has pausado para atender clientes express. Haz clic en "▶ Retomar" para continuar cualquiera de ellas.
+      </p>
+
+      <div id="listaVentasPausadas"></div>
+    </div>
+  </div>
+
+  <!-- Producto Express -->
+  <div class="fac-print-overlay" id="overlayProductoExpress" style="display:none;">
+    <div class="abono-modal">
+      <div class="abono-modal-header">
+        <h3>➕ Producto Express</h3>
+        <button type="button" id="btnCerrarProductoExpress" class="btn-cerrar-x">✕</button>
+      </div>
+
+      <p style="font-size:0.85em; color:#555;">
+        Úsalo para vender algo que no está registrado en Inventario. Se agrega a esta factura y se contabiliza en el Cierre de Caja, pero no descuenta existencia de ningún producto.
+      </p>
+
+      <label for="peReferencia">Referencia (opcional)</label>
+      <input type="text" id="peReferencia" placeholder="Opcional">
+
+      <label for="peCodigo">Código (opcional)</label>
+      <input type="text" id="peCodigo" placeholder="Opcional">
+
+      <label for="peDescripcion">Descripción *</label>
+      <input type="text" id="peDescripcion" placeholder="Nombre o descripción del producto">
+
+      <label for="peCantidad">Cantidad</label>
+      <input type="number" id="peCantidad" min="1" value="1">
+
+      <label for="pePrecio">Precio unitario</label>
+      <input type="number" step="0.01" id="pePrecio" placeholder="0.00">
+
+      <p id="peMensaje"></p>
+
+      <button type="button" id="btnAgregarProductoExpress" class="btn-facturar">✔ Agregar a la Venta</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="permisos.js"></script>
+  <script src="facturacion.js"></script>
+  <script src="atajos-teclado.js"></script>
+</body>
+</html>
